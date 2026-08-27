@@ -107,24 +107,36 @@
       color: var(--mc-blue);
     }
 
-    .cart-btn {
-      position: relative;
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .support-btn, .cart-btn {
       background: rgba(56, 182, 255, 0.1);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 10px 18px;
+      padding: 10px 16px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      text-decoration: none;
       transition: all 0.2s;
+      font-size: 0.95rem;
     }
 
-    .cart-btn:hover {
+    .support-btn:hover, .cart-btn:hover {
       border-color: var(--mc-blue);
       box-shadow: 0 0 15px var(--mc-blue-glow);
+      color: var(--mc-blue);
+    }
+
+    .cart-btn {
+      position: relative;
     }
 
     .cart-count {
@@ -174,7 +186,7 @@
       font-size: 1.1rem;
     }
 
-    /* FILTRY A STATUS */
+    /* FILTRY, VYHLEDÁVÁNÍ A STATUS */
     .controls-container {
       max-width: 1200px;
       margin: 30px auto;
@@ -184,6 +196,14 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
+    }
+
+    .filters-search-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      flex-grow: 1;
     }
 
     .filter-tags {
@@ -207,6 +227,39 @@
       background: rgba(56, 182, 255, 0.2);
       border-color: var(--mc-blue);
       color: var(--mc-blue);
+    }
+
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+      max-width: 300px;
+      min-width: 220px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 9px 14px 9px 38px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--mc-blue);
+      box-shadow: 0 0 10px var(--mc-blue-glow);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .server-status {
@@ -238,6 +291,7 @@
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 25px;
       flex-grow: 1;
+      width: 100%;
     }
 
     .item-card {
@@ -428,6 +482,45 @@
       color: var(--mc-blue);
     }
 
+    /* MODÁLNÍ OKNO SUPPORTU */
+    .support-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .support-modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .support-modal {
+      background: #080e1c;
+      border: 1px solid var(--mc-blue);
+      width: 90%;
+      max-width: 480px;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 25px var(--mc-blue-glow);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .support-modal-overlay.active .support-modal {
+      transform: translateY(0);
+    }
+
     /* MODÁLNÍ OKNO KOŠÍKU */
     .modal-overlay {
       position: fixed;
@@ -551,7 +644,7 @@
       color: var(--text-main);
     }
 
-    .form-group input {
+    .form-group input, .form-group textarea {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-color);
       color: var(--text-main);
@@ -560,9 +653,10 @@
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s;
+      font-family: var(--font-ui);
     }
 
-    .form-group input:focus {
+    .form-group input:focus, .form-group textarea:focus {
       border-color: var(--mc-blue);
       box-shadow: 0 0 10px var(--mc-blue-glow);
     }
@@ -645,10 +739,15 @@
       <li><a href="index.html">Domů</a></li>
       <li><a href="obchod.html" class="active">Obchod</a></li>
     </ul>
-    <button class="cart-btn" onclick="toggleCart()">
-      <i class="fa-solid fa-cart-shopping"></i> Košík
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <div class="header-actions">
+      <button class="support-btn" onclick="toggleSupport()">
+        <i class="fa-solid fa-headset"></i> Support
+      </button>
+      <button class="cart-btn" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping"></i> Košík
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </header>
 
   <!-- HERO SECTION -->
@@ -658,12 +757,18 @@
     <p>Vyber si itemy, zaplať na serveru přes <b>/paybusiness</b> a pošli nám screenshot potvrzení. Balíček doručíme přímo na tvoje souřadnice!</p>
   </section>
 
-  <!-- FILTRY A STATUS -->
+  <!-- FILTRY, VYHLEDÁVÁNÍ A STATUS -->
   <div class="controls-container">
-    <div class="filter-tags">
-      <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
-      <button class="filter-btn" onclick="filterItems('stavebni')">Stavební materiály</button>
-      <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
+    <div class="filters-search-wrapper">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
+        <button class="filter-btn" onclick="filterItems('stavebni')">Stavební materiály</button>
+        <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
+      </div>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Hledat item..." oninput="filterItems()">
+      </div>
     </div>
     <div class="server-status">
       <div class="status-dot"></div>
@@ -762,6 +867,30 @@
     </div>
   </footer>
 
+  <!-- MODAL SUPPORTU -->
+  <div class="support-modal-overlay" id="supportModal">
+    <div class="support-modal">
+      <div class="cart-header">
+        <h2><i class="fa-solid fa-headset" style="color: var(--mc-blue);"></i> Zákaznická Podpora</h2>
+        <button class="close-btn" onclick="toggleSupport()">&times;</button>
+      </div>
+      <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">
+        Máš problém s objednávkou, nedorazily ti itemy nebo se něco stalo? Napiš nám přímo na podporu a my se ti ozveme!
+      </div>
+      <form class="checkout-form" id="supportForm" onsubmit="handleSupportSubmit(event)">
+        <div class="form-group">
+          <label for="supportNick">Tvůj Minecraft Nick *</label>
+          <input type="text" id="supportNick" placeholder="např. Steve_CZ" required>
+        </div>
+        <div class="form-group">
+          <label for="supportMessage">Popis problému *</label>
+          <textarea id="supportMessage" rows="4" placeholder="Napiš co se stalo..." required></textarea>
+        </div>
+        <button type="submit" class="checkout-btn" id="supportSubmitBtn">ODESLAT NA PODPORU</button>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL KOŠÍKU -->
   <div class="modal-overlay" id="cartModal">
     <div class="cart-modal">
@@ -814,6 +943,7 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
 
     let cart = [];
+    let currentCategory = 'all';
 
     document.addEventListener("DOMContentLoaded", () => {
       const cards = document.querySelectorAll('.item-card');
@@ -908,12 +1038,62 @@
       modal.classList.toggle('active');
     }
 
+    function toggleSupport() {
+      const modal = document.getElementById('supportModal');
+      modal.classList.toggle('active');
+    }
+
     function updateFileName(input) {
       const labelText = document.getElementById('fileNameText');
       if (input.files && input.files[0]) {
         labelText.innerText = input.files[0].name;
       } else {
         labelText.innerText = 'Nahrát screenshot platby';
+      }
+    }
+
+    async function handleSupportSubmit(event) {
+      event.preventDefault();
+      const nick = document.getElementById('supportNick').value;
+      const message = document.getElementById('supportMessage').value;
+      const submitBtn = document.getElementById('supportSubmitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "ODESÍLÁM...";
+
+      const payloadJson = {
+        embeds: [{
+          title: "🎧 Nový požadavek na Support!",
+          color: 16753920,
+          fields: [
+            { name: "👤 Hráч", value: `\`${nick}\``, inline: true },
+            { name: "💬 Zpráva / Problém", value: message }
+          ],
+          footer: { text: "Noxify Support System" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        const response = await fetch(DISCORD_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadJson)
+        });
+
+        if (response.ok) {
+          alert(`Díky ${nick}!\n\nTvůj požadavek na podporu byl odeslán. Ozveme se ti co nejdříve.`);
+          document.getElementById('supportForm').reset();
+          toggleSupport();
+        } else {
+          alert('Chyba při odesílání požadavku na Discord.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Došlo k chybě při odesílání.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ODESLAT NA PODPORU";
       }
     }
 
@@ -989,14 +1169,22 @@
     }
 
     function filterItems(category) {
-      const cards = document.querySelectorAll('.item-card');
-      const buttons = document.querySelectorAll('.filter-btn');
+      if (category !== undefined) {
+        currentCategory = category;
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+      }
 
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.item-card');
 
       cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
+        const title = card.querySelector('.item-title').innerText.toLowerCase();
+        const matchesCategory = (currentCategory === 'all' || card.dataset.category === currentCategory);
+        const matchesSearch = title.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
