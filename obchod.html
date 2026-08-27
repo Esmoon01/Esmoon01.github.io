@@ -62,7 +62,7 @@
     .nav-links a.active, .nav-links a:hover { color: var(--mc-blue); }
 
     .header-actions { display: flex; align-items: center; gap: 12px; }
-    .support-btn, .review-btn, .cart-btn {
+    .support-btn, .cart-btn {
       background: rgba(56, 182, 255, 0.1);
       border: 1px solid var(--border-color);
       color: var(--text-main);
@@ -76,7 +76,7 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-    .support-btn:hover, .review-btn:hover, .cart-btn:hover { border-color: var(--mc-blue); box-shadow: 0 0 15px var(--mc-blue-glow); color: var(--mc-blue); }
+    .support-btn:hover, .cart-btn:hover { border-color: var(--mc-blue); box-shadow: 0 0 15px var(--mc-blue-glow); color: var(--mc-blue); }
     .cart-count { background: var(--mc-blue); color: #050914; font-weight: 800; font-size: 0.85rem; padding: 2px 7px; border-radius: 50%; }
 
     .hero { text-align: center; padding: 70px 20px 40px; max-width: 800px; margin: 0 auto; }
@@ -216,7 +216,6 @@
     </ul>
     <div class="header-actions">
       <button class="support-btn" onclick="toggleSupport()"><i class="fa-solid fa-headset"></i> Support</button>
-      <button class="review-btn" onclick="toggleReview()"><i class="fa-solid fa-star"></i> Recenze</button>
       <button class="cart-btn" onclick="toggleCart()"><i class="fa-solid fa-cart-shopping"></i> Košík <span class="cart-count" id="cartCount">0</span></button>
     </div>
   </header>
@@ -696,7 +695,6 @@
       }
     }
 
-    // Inicializace po načtení DOM
     document.addEventListener('DOMContentLoaded', () => {
       renderShop();
       loadReviews();
