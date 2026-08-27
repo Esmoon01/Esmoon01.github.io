@@ -103,7 +103,7 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
+    .nav-links a.active, .nav-links a:hover {
       color: var(--mc-blue);
     }
 
@@ -637,13 +637,13 @@
 
   <!-- HEADER -->
   <header>
-    <a href="#" class="logo-link">
+    <a href="index.html" class="logo-link">
       <img src="logo.png" alt="NOXIFY Logo" class="logo-img">
       <span class="logo-text">Noxify</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#">Domů</a></li>
-      <li><a href="#shop">Obchod</a></li>
+      <li><a href="index.html">Domů</a></li>
+      <li><a href="obchod.html" class="active">Obchod</a></li>
     </ul>
     <button class="cart-btn" onclick="toggleCart()">
       <i class="fa-solid fa-cart-shopping"></i> Košík
