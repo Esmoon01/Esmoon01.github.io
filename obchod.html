@@ -105,6 +105,7 @@
     .item-badge { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
     .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
     .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
+    .badge-rudy { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid #ffd700; }
     .badge-vzacne { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-size: 4rem; }
@@ -188,89 +189,19 @@
         <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
         <button class="filter-btn" onclick="filterItems('stavebni')">Stavební materiály</button>
         <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
+        <button class="filter-btn" onclick="filterItems('rudy')">Rudy & Ingoty</button>
         <button class="filter-btn" onclick="filterItems('vzacne')">Vzácné & Ostatní</button>
       </div>
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Hledat item..." oninput="filterItems()">
+        <input type="text" id="searchInput" placeholder="Hledat item..." oninput="renderShop()">
       </div>
     </div>
     <div class="server-status"><div class="status-dot"></div>play.rpmc.cz</div>
   </div>
 
-  <main class="shop-grid" id="shop">
-    <!-- Stavební materiály -->
-    <div class="item-card" data-category="stavebni">
-      <div class="item-badge badge-stavebni">Stavební</div>
-      <div class="item-img-wrap">🏛️</div>
-      <h3 class="item-title">Cobblestone (64 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="250">250 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Cobblestone (64 ks)', 250)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <div class="item-card" data-category="stavebni">
-      <div class="item-badge badge-stavebni">Stavební</div>
-      <div class="item-img-wrap">🧱</div>
-      <h3 class="item-title">Stone (64 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="900">900 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Stone (64 ks)', 900)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <div class="item-card" data-category="stavebni">
-      <div class="item-badge badge-stavebni">Stavební</div>
-      <div class="item-img-wrap">🪵</div>
-      <h3 class="item-title">Dubové dřevo (64 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="600">600 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Dubové dřevo (64 ks)', 600)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <!-- Přírodní bloky -->
-    <div class="item-card" data-category="prirodni">
-      <div class="item-badge badge-prirodni">Přírodní</div>
-      <div class="item-img-wrap">🟫</div>
-      <h3 class="item-title">Hlína / Dirt (64 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="150">150 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Hlína (64 ks)', 150)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <div class="item-card" data-category="prirodni">
-      <div class="item-badge badge-prirodni">Přírodní</div>
-      <div class="item-img-wrap">🟨</div>
-      <h3 class="item-title">Písek / Sand (64 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="300">300 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Písek (64 ks)', 300)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <!-- Vzácné věci -->
-    <div class="item-card" data-category="vzacne">
-      <div class="item-badge badge-vzacne">Vzácné</div>
-      <div class="item-img-wrap">💎</div>
-      <h3 class="item-title">Diamant (1 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="1200">1 200 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Diamant (1 ks)', 1200)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
-
-    <div class="item-card" data-category="vzacne">
-      <div class="item-badge badge-vzacne">Vzácné</div>
-      <div class="item-img-wrap">🪙</div>
-      <h3 class="item-title">Netherite ingot (1 ks)</h3>
-      <div class="item-footer">
-        <span class="item-price" data-price="5000">5 000 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Netherite ingot (1 ks)', 5000)"><i class="fa-solid fa-plus"></i> Koupit</button>
-      </div>
-    </div>
+  <main class="shop-grid" id="shopGrid">
+    <!-- Sem se itemy nahrávají automaticky přes JavaScript -->
   </main>
 
   <footer>
@@ -356,8 +287,66 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
+    // ZDE JE DATABÁZE VŠECH ITEMŮ V OBCHODĚ
+    const shopItems = [
+      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", icon: "🏛️" },
+      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", icon: "🧱" },
+      { name: "Dubové dřevo (64 ks)", price: 600, category: "stavebni", badge: "Stavební", icon: "🪵" },
+      { name: "Smrkové dřevo (64 ks)", price: 600, category: "stavebni", badge: "Stavební", icon: "🪵" },
+      { name: "Cihly / Bricks (64 ks)", price: 1100, category: "stavebni", badge: "Stavební", icon: "🧱" },
+      { name: "Hlína / Dirt (64 ks)", price: 150, category: "prirodni", badge: "Přírodní", icon: "🟫" },
+      { name: "Písek / Sand (64 ks)", price: 300, category: "prirodni", badge: "Přírodní", icon: "🟨" },
+      { name: "Gravel / Štěrk (64 ks)", price: 350, category: "prirodni", badge: "Přírodní", icon: "🔳" },
+      { name: "Sklo / Glass (64 ks)", price: 500, category: "prirodni", badge: "Přírodní", icon: "🪟" },
+      { name: "Železo / Iron ingot (64 ks)", price: 2400, category: "rudy", badge: "Rudy", icon: "⚙️" },
+      { name: "Zlato / Gold ingot (64 ks)", price: 3200, category: "rudy", badge: "Rudy", icon: "🟡" },
+      { name: "Uhlias / Coal (64 ks)", price: 400, category: "rudy", badge: "Rudy", icon: "⬛" },
+      { name: "Diamant (1 ks)", price: 1200, category: "vzacne", badge: "Vzácné", icon: "💎" },
+      { name: "Netherite ingot (1 ks)", price: 5000, category: "vzacne", badge: "Vzácné", icon: "🪙" },
+      { name: "Totem of Undying (1 ks)", price: 8500, category: "vzacne", badge: "Vzácné", icon: "🛡️" },
+      { name: "Elytra (1 ks)", price: 25000, category: "vzacne", badge: "Vzácné", icon: "🪽" }
+    ];
+
     let cart = [];
     let currentCategory = 'all';
+
+    function renderShop() {
+      const grid = document.getElementById('shopGrid');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      
+      let html = '';
+      shopItems.forEach(item => {
+        const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          let badgeClass = 'badge-stavebni';
+          if (item.category === 'prirodni') badgeClass = 'badge-prirodni';
+          if (item.category === 'rudy') badgeClass = 'badge-rudy';
+          if (item.category === 'vzacne') badgeClass = 'badge-vzacne';
+
+          html += `
+            <div class="item-card" data-category="${item.category}">
+              <div class="item-badge ${badgeClass}">${item.badge}</div>
+              <div class="item-img-wrap">${item.icon}</div>
+              <h3 class="item-title">${item.name}</h3>
+              <div class="item-footer">
+                <span class="item-price">${item.price.toLocaleString('cs-CZ')} Kr</span>
+                <button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price})"><i class="fa-solid fa-plus"></i> Koupit</button>
+              </div>
+            </div>`;
+        }
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function filterItems(category) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderShop();
+    }
 
     function addToCart(name, price) {
       cart.push({ name, price });
@@ -503,19 +492,8 @@
       }
     }
 
-    function filterItems(category) {
-      if (category !== undefined) {
-        currentCategory = category;
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-      }
-      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-      document.querySelectorAll('.item-card').forEach(card => {
-        const title = card.querySelector('.item-title').innerText.toLowerCase();
-        const matchesCategory = (currentCategory === 'all' || card.dataset.category === currentCategory);
-        card.style.display = (matchesCategory && title.includes(searchQuery)) ? 'flex' : 'none';
-      });
-    }
+    // Spustit generování stránek při načtení
+    renderShop();
   </script>
 </body>
 </html>
