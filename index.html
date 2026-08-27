@@ -258,7 +258,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--mc-blue-glow);
     }
 
-    /* STYLY PRO VYPRODANÝ ITEM */
+    /* AUTOMATICKÉ STYLY PRO VYPRODANÝ ITEM PŘES JS */
     .item-card.sold-out {
       opacity: 0.6;
       border-color: rgba(255, 85, 85, 0.3);
@@ -273,11 +273,6 @@
     }
     .item-card.sold-out:hover .item-img-wrap img {
       transform: none;
-    }
-    .badge-soldout { 
-      background: rgba(255, 85, 85, 0.2); 
-      color: var(--mc-red); 
-      border: 1px solid var(--mc-red); 
     }
     .add-to-cart-btn.sold-out-btn {
       background: rgba(255, 255, 255, 0.05);
@@ -305,6 +300,7 @@
     .badge-legendary { background: rgba(255, 170, 0, 0.2); color: var(--mc-gold); border: 1px solid var(--mc-gold); }
     .badge-epic { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
     .badge-rare { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
+    .badge-soldout { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap {
       height: 140px;
@@ -697,64 +693,61 @@
     
     <!-- 
       JAK NASTAVIT VYPRODÁNO / NASKLADNĚNO:
-      - Pokud je item NASKLADNĚNÝ: class bude jen "item-card", badge bude ukazovat stav rarity (např. badge-legendary) a cena bude normální.
-      - Pokud je item VYPRODANÝ: k "item-card" přidej " sold-out" (tedy class="item-card sold-out"), badge přepni na "badge-soldout", text na cenu dej "Vyprodáno" a tlačítko uprav na třídu "add-to-cart-btn sold-out-btn" s atributem "disabled".
+      Stačí u card itemu změnit atribut data-soldout:
+      - data-soldout="false" -> Item je naskladněný a normálně se prodává.
+      - data-soldout="true"  -> Item je automaticky vyprodaný, zašedlý a nejde koupit!
     -->
 
-    <!-- Item 1: Naskladněný item (příklad) -->
-    <div class="item-card" data-category="zbrane">
-      <span class="item-badge badge-legendary">Legendární</span>
+    <!-- Item 1: Naskladněný (false) -->
+    <div class="item-card" data-category="zbrane" data-soldout="false">
       <div class="item-img-wrap">
         <img src="https://minecraft.wiki/images/Netherite_Sword_JE2_BE2.png" alt="Netherite Sword">
       </div>
       <h3 class="item-title">Excalibur Sharpness VI</h3>
       <div class="item-footer">
-        <span class="item-price">1 500 Kr</span>
+        <span class="item-price" data-price="1500">1 500 Kr</span>
         <button class="add-to-cart-btn" onclick="addToCart('Excalibur Sharpness VI', 1500, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 2: Vyprodaný item (příklad) -->
-    <div class="item-card sold-out" data-category="specialni">
-      <span class="item-badge badge-soldout">Vyprodáno</span>
+    <!-- Item 2: Vyprodaný (true) -->
+    <div class="item-card" data-category="specialni" data-soldout="true">
       <div class="item-img-wrap">
         <img src="https://minecraft.wiki/images/Elytra_JE2_BE2.png" alt="Elytra">
       </div>
       <h3 class="item-title">Dragon Elytra</h3>
       <div class="item-footer">
-        <span class="item-price">Vyprodáno</span>
-        <button class="add-to-cart-btn sold-out-btn" disabled onclick="addToCart('Dragon Elytra', 0, this)">
-          <i class="fa-solid fa-ban"></i> Nelze koupit
+        <span class="item-price" data-price="3500">3 500 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Dragon Elytra', 3500, this)">
+          <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 3: Naskladněný item (příklad) -->
-    <div class="item-card" data-category="suroviny">
-      <span class="item-badge badge-rare">Rare</span>
+    <!-- Item 3: Naskladněný (false) -->
+    <div class="item-card" data-category="suroviny" data-soldout="false">
       <div class="item-img-wrap">
         <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamonds">
       </div>
       <h3 class="item-title">Stack Diamantů (64x)</h3>
       <div class="item-footer">
-        <span class="item-price">500 Kr</span>
+        <span class="item-price" data-price="500">500 Kr</span>
         <button class="add-to-cart-btn" onclick="addToCart('Stack Diamantů (64x)', 500, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 4: Naskladněný item (příklad) -->
-    <div class="item-card" data-category="specialni">
-      <span class="item-badge badge-legendary">Legendární</span>
+    <!-- Item 4: Vyprodaný (true) -->
+    <div class="item-card" data-category="specialni" data-soldout="true">
       <div class="item-img-wrap">
         <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_JE2_BE2.gif" alt="God Apple">
       </div>
       <h3 class="item-title">God Apple Pack (16x)</h3>
       <div class="item-footer">
-        <span class="item-price">2 000 Kr</span>
+        <span class="item-price" data-price="2000">2 000 Kr</span>
         <button class="add-to-cart-btn" onclick="addToCart('God Apple Pack (16x)', 2000, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
@@ -842,10 +835,48 @@
 
     let cart = [];
 
+    // Automatická inicializace stavů produktů při načtení stránky
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll('.item-card');
+      
+      cards.forEach(card => {
+        const isSoldOut = card.getAttribute('data-soldout') === 'true';
+        const priceEl = card.querySelector('.item-price');
+        const btnEl = card.querySelector('.add-to-cart-btn');
+
+        // Vytvoříme badge element pro stav (pokud už tam není)
+        let badgeEl = card.querySelector('.item-badge');
+        if (!badgeEl) {
+          badgeEl = document.createElement('span');
+          badgeEl.className = 'item-badge';
+          card.appendChild(badgeEl);
+        }
+
+        if (isSoldOut) {
+          card.classList.add('sold-out');
+          badgeEl.className = 'item-badge badge-soldout';
+          badgeEl.innerText = 'Vyprodáno';
+          priceEl.innerText = 'Vyprodáno';
+          btnEl.className = 'add-to-cart-btn sold-out-btn';
+          btnEl.disabled = true;
+          btnEl.innerHTML = '<i class="fa-solid fa-ban"></i> Nelze koupit';
+        } else {
+          card.classList.remove('sold-out');
+          badgeEl.className = 'item-badge badge-rare'; // Můžeš změnit dle vkusu na legendary/epic/rare
+          badgeEl.innerText = 'Skladem';
+          // Vrátíme původní cenu z data atributu
+          const originalPrice = priceEl.getAttribute('data-price');
+          priceEl.innerText = Number(originalPrice).toLocaleString('cs-CZ') + ' Kr';
+          btnEl.className = 'add-to-cart-btn';
+          btnEl.disabled = false;
+          btnEl.innerHTML = '<i class="fa-solid fa-plus"></i> Koupit';
+        }
+      });
+    });
+
     function addToCart(name, price, buttonElement) {
-      // Bezpečnostní pojistka: pokud je karta vyprodaná, item se do košíku nepřidá
       const card = buttonElement.closest('.item-card');
-      if (card && card.classList.contains('sold-out')) {
+      if (card && card.getAttribute('data-soldout') === 'true') {
         alert('Tento item je momentálně vyprodaný a nelze jej přidat do košíku!');
         return;
       }
@@ -885,7 +916,7 @@
       });
 
       cartItems.innerHTML = itemsHTML;
-      cartTotal.innerText = `${total} Kr`;
+      cartTotal.innerText = `${total.toLocaleString('cs-CZ')} Kr`;
     }
 
     function removeFromCart(index) {
