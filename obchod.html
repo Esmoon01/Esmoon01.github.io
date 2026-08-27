@@ -106,7 +106,10 @@
     .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
     .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
 
-    .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-size: 4rem; }
+    .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+    .item-img-wrap img { max-height: 90px; width: auto; image-rendering: pixelated; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5)); transition: transform 0.3s; }
+    .item-card:hover .item-img-wrap img { transform: scale(1.1); }
+
     .item-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
     .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
     .item-price { font-family: var(--font-pixel); font-size: 1.7rem; color: var(--mc-blue); }
@@ -283,13 +286,13 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
-    // PŘESNÉ POLOŽKY PODLE TVÉHO ZADÁNÍ
+    // POLOŽKY S REÁLNÝMI MINECRAFT OBRÁZKY
     const shopItems = [
-      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", icon: "🏛️" },
-      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", icon: "🧱" },
-      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", icon: "🧱" },
-      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", icon: "🪵" },
-      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", icon: "🟫" }
+      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Cobblestone_JE3_BE2.png" },
+      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Stone_JE2_BE2.png" },
+      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Stone_Bricks_JE2_BE2.png" },
+      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Oak_Log_JE5_BE3.png" },
+      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", img: "https://minecraft.wiki/images/Dirt_JE2_BE2.png" }
     ];
 
     let cart = [];
@@ -310,7 +313,7 @@
           html += `
             <div class="item-card" data-category="${item.category}">
               <div class="item-badge ${badgeClass}">${item.badge}</div>
-              <div class="item-img-wrap">${item.icon}</div>
+              <div class="item-img-wrap"><img src="${item.img}" alt="${item.name}"></div>
               <h3 class="item-title">${item.name}</h3>
               <div class="item-footer">
                 <span class="item-price">${item.price.toLocaleString('cs-CZ')} Kr</span>
