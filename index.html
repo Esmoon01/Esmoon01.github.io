@@ -57,21 +57,29 @@
       backdrop-filter: blur(16px);
       background: rgba(5, 9, 20, 0.85);
       border-bottom: 1px solid var(--border-color);
-      padding: 15px 30px;
+      padding: 12px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .logo {
+    /* Úprava loga vlevo nahoře */
+    .logo-link {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-family: var(--font-pixel);
-      font-size: 2.2rem;
-      color: var(--mc-blue);
-      text-shadow: 0 0 12px var(--mc-blue-glow);
       text-decoration: none;
+    }
+
+    .logo-img {
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--mc-blue-glow));
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
     }
 
     .nav-links {
@@ -602,8 +610,9 @@
 
   <!-- HEADER -->
   <header>
-    <a href="#" class="logo">
-      <i class="fa-solid fa-cube"></i> NOXIFY
+    <!-- Logo vlevo nahoře -->
+    <a href="#" class="logo-link">
+      <img src="logo.png" alt="NOXIFY Logo" class="logo-img">
     </a>
     <ul class="nav-links">
       <li><a href="#">Domů</a></li>
