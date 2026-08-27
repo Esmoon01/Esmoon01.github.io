@@ -630,7 +630,6 @@
       <button class="filter-btn" onclick="filterItems('suroviny')">Suroviny</button>
       <button class="filter-btn" onclick="filterItems('specialni')">Speciální</button>
     </div>
-    <!-- ZDE BYLA PROVEDENA ZMĚNA -->
     <div class="server-status">
       <div class="status-dot"></div>
       play.rpmc.cz
@@ -771,12 +770,15 @@
           <span id="cartTotal" style="color: var(--mc-blue);">0 Kr</span>
         </div>
 
-        <button type="submit" class="checkout-btn">ODESLAT OBJEDNÁVKU</button>
+        <button type="submit" class="checkout-btn" id="submitBtn">ODESLAT OBJEDNÁVKU</button>
       </form>
     </div>
   </div>
 
   <script>
+    // TVŮJ VLOŽENÝ DISCORD WEBHOOK URL
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
+
     let cart = [];
 
     function addToCart(name, price) {
@@ -837,7 +839,7 @@
       }
     }
 
-    function handleCheckout(event) {
+    async function handleCheckout(event) {
       event.preventDefault();
 
       if (cart.length === 0) {
@@ -848,19 +850,68 @@
       const nick = document.getElementById('playerNick').value;
       const coords = document.getElementById('playerCoords').value;
       const fileInput = document.getElementById('payScreenshot');
+      const submitBtn = document.getElementById('submitBtn');
 
       if (!fileInput.files.length) {
         alert('Prosím nahraj screenshot potvrzující platbu!');
         return;
       }
 
-      alert(`Díky ${nick}!\n\nObjednávka byla úspěšně odeslána.\nBalíček doručíme na souřadnice: ${coords}.\nAdmini ověří screenshot platby v příkazu /paybusiness Noxify_sro.`);
-      
-      cart = [];
-      document.getElementById('checkoutForm').reset();
-      document.getElementById('fileNameText').innerText = 'Nahrát screenshot platby';
-      updateCartUI();
-      toggleCart();
+      // Vypnutí tlačítka po dobu odesílání
+      submitBtn.disabled = true;
+      submitBtn.innerText = "ODESÍLÁM...";
+
+      // Výpočet celkové ceny a seznamu položek
+      let total = 0;
+      const itemList = cart.map(item => {
+        total += item.price;
+        return `- ${item.name} (${item.price} Kr)`;
+      }).join('\n');
+
+      // Příprava strukturované zprávy pro Discord
+      const formData = new FormData();
+      const payloadJson = {
+        embeds: [{
+          title: "🛒 Nová Objednávka z Obchodu!",
+          color: 3716863, // Neonovo modrá barva
+          fields: [
+            { name: "👤 Nick ve hře", value: `\`${nick}\``, inline: true },
+            { name: "📍 Souřadnice (X, Y, Z)", value: `\`${coords}\``, inline: true },
+            { name: "💰 Celková částka", value: `**${total} Kr**`, inline: true },
+            { name: "📦 Objednané položky", value: itemList }
+          ],
+          footer: { text: "Noxify Web Shop System" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      formData.append('payload_json', JSON.stringify(payloadJson));
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        // Odeslání požadavku na Discord Webhook
+        const response = await fetch(DISCORD_WEBHOOK_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          alert(`Díky ${nick}!\n\nObjednávka byla úspěšně odeslána.\nBalíček doručíme na souřadnice: ${coords}.`);
+          cart = [];
+          document.getElementById('checkoutForm').reset();
+          document.getElementById('fileNameText').innerText = 'Nahrát screenshot platby';
+          updateCartUI();
+          toggleCart();
+        } else {
+          alert('Chyba při odesílání objednávky na Discord. Zkontrolujte připojení.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Došlo k chybě při odesílání objednávky.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
+      }
     }
 
     function filterItems(category) {
