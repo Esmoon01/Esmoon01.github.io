@@ -105,8 +105,6 @@
     .item-badge { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
     .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
     .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
-    .badge-rudy { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid #ffd700; }
-    .badge-vzacne { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-size: 4rem; }
     .item-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
@@ -187,10 +185,8 @@
     <div class="filters-search-wrapper">
       <div class="filter-tags">
         <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
-        <button class="filter-btn" onclick="filterItems('stavebni')">Stavební materiály</button>
+        <button class="filter-btn" onclick="filterItems('stavebni')">Stavební bloky</button>
         <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
-        <button class="filter-btn" onclick="filterItems('rudy')">Rudy & Ingoty</button>
-        <button class="filter-btn" onclick="filterItems('vzacne')">Vzácné & Ostatní</button>
       </div>
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -201,7 +197,7 @@
   </div>
 
   <main class="shop-grid" id="shopGrid">
-    <!-- Sem se itemy nahrávají automaticky přes JavaScript -->
+    <!-- Generováno automaticky přes JS -->
   </main>
 
   <footer>
@@ -287,24 +283,13 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
-    // ZDE JE DATABÁZE VŠECH ITEMŮ V OBCHODĚ
+    // PŘESNÉ POLOŽKY PODLE TVÉHO ZADÁNÍ
     const shopItems = [
       { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", icon: "🏛️" },
       { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", icon: "🧱" },
-      { name: "Dubové dřevo (64 ks)", price: 600, category: "stavebni", badge: "Stavební", icon: "🪵" },
-      { name: "Smrkové dřevo (64 ks)", price: 600, category: "stavebni", badge: "Stavební", icon: "🪵" },
-      { name: "Cihly / Bricks (64 ks)", price: 1100, category: "stavebni", badge: "Stavební", icon: "🧱" },
-      { name: "Hlína / Dirt (64 ks)", price: 150, category: "prirodni", badge: "Přírodní", icon: "🟫" },
-      { name: "Písek / Sand (64 ks)", price: 300, category: "prirodni", badge: "Přírodní", icon: "🟨" },
-      { name: "Gravel / Štěrk (64 ks)", price: 350, category: "prirodni", badge: "Přírodní", icon: "🔳" },
-      { name: "Sklo / Glass (64 ks)", price: 500, category: "prirodni", badge: "Přírodní", icon: "🪟" },
-      { name: "Železo / Iron ingot (64 ks)", price: 2400, category: "rudy", badge: "Rudy", icon: "⚙️" },
-      { name: "Zlato / Gold ingot (64 ks)", price: 3200, category: "rudy", badge: "Rudy", icon: "🟡" },
-      { name: "Uhlias / Coal (64 ks)", price: 400, category: "rudy", badge: "Rudy", icon: "⬛" },
-      { name: "Diamant (1 ks)", price: 1200, category: "vzacne", badge: "Vzácné", icon: "💎" },
-      { name: "Netherite ingot (1 ks)", price: 5000, category: "vzacne", badge: "Vzácné", icon: "🪙" },
-      { name: "Totem of Undying (1 ks)", price: 8500, category: "vzacne", badge: "Vzácné", icon: "🛡️" },
-      { name: "Elytra (1 ks)", price: 25000, category: "vzacne", badge: "Vzácné", icon: "🪽" }
+      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", icon: "🧱" },
+      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", icon: "🪵" },
+      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", icon: "🟫" }
     ];
 
     let cart = [];
@@ -320,10 +305,7 @@
         const matchesSearch = item.name.toLowerCase().includes(searchQuery);
 
         if (matchesCategory && matchesSearch) {
-          let badgeClass = 'badge-stavebni';
-          if (item.category === 'prirodni') badgeClass = 'badge-prirodni';
-          if (item.category === 'rudy') badgeClass = 'badge-rudy';
-          if (item.category === 'vzacne') badgeClass = 'badge-vzacne';
+          let badgeClass = item.category === 'stavebni' ? 'badge-stavebni' : 'badge-prirodni';
 
           html += `
             <div class="item-card" data-category="${item.category}">
