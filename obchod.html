@@ -243,6 +243,10 @@
           <input type="text" id="supportNick" placeholder="např. Steve_CZ" required>
         </div>
         <div class="form-group">
+          <label for="supportDiscord">Discord Jméno *</label>
+          <input type="text" id="supportDiscord" placeholder="např. esmoon01" required>
+        </div>
+        <div class="form-group">
           <label for="supportMessage">Popis problému *</label>
           <textarea id="supportMessage" rows="4" placeholder="Napiš co se stalo..." required></textarea>
         </div>
@@ -347,6 +351,7 @@
     async function handleSupportSubmit(event) {
       event.preventDefault();
       const nick = document.getElementById('supportNick').value;
+      const discord = document.getElementById('supportDiscord').value;
       const message = document.getElementById('supportMessage').value;
       const submitBtn = document.getElementById('supportSubmitBtn');
 
@@ -359,6 +364,7 @@
           color: 16753920,
           fields: [
             { name: "👤 Minecraft Nick", value: `\`${nick}\``, inline: true },
+            { name: "💬 Discord", value: `\`${discord}\``, inline: true },
             { name: "📝 Popis problému", value: message }
           ],
           footer: { text: "Noxify Support System" },
@@ -456,4 +462,4 @@
     }
   </script>
 </body>
-</html> gggg
+</html>
