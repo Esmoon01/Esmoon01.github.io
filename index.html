@@ -315,27 +315,27 @@
       box-shadow: 0 0 15px var(--mc-blue-glow);
     }
 
-    /* FOOTER (ZÁPATÍ S KONTAKTY VPRAVO) */
+    /* FOOTER (KOMPAKTNÍ ZMENŠENÉ ZÁPATÍ) */
     footer {
       max-width: 1200px;
       width: 100%;
-      margin: 50px auto 0;
-      padding: 30px 20px;
+      margin: 40px auto 0;
+      padding: 20px 20px;
       border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 25px;
+      gap: 15px;
     }
 
     .footer-left {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
     }
 
     .footer-left p {
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .footer-left a {
@@ -355,8 +355,8 @@
 
     .footer-contacts h4 {
       color: var(--mc-cyan);
-      font-size: 1rem;
-      margin-bottom: 10px;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
       font-weight: 700;
     }
 
@@ -364,21 +364,22 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
     }
 
     .contact-item {
       color: var(--text-main);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 8px;
     }
 
     .contact-item i {
       color: var(--mc-blue);
-      width: 16px;
+      width: 14px;
+      font-size: 0.85rem;
       text-align: center;
     }
 
@@ -582,7 +583,6 @@
 
     .checkout-btn:hover { background: #70c7ff; }
 
-    /* RESPONSIVITA FOOTERU */
     @media (max-width: 600px) {
       footer {
         flex-direction: column;
