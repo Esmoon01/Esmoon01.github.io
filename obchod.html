@@ -105,6 +105,9 @@
     .item-badge { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
     .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
     .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
+    
+    /* Styl pro vyprodaný badge */
+    .badge-vyprodano { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
     .item-img-wrap img { max-height: 90px; width: auto; image-rendering: pixelated; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5)); transition: transform 0.3s; }
@@ -113,13 +116,14 @@
     .item-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
     .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
     .item-price { font-family: var(--font-pixel); font-size: 1.7rem; color: var(--mc-blue); }
+    
     .add-to-cart-btn { background: var(--mc-blue); color: #050914; border: none; padding: 10px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .add-to-cart-btn:disabled { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); cursor: not-allowed; box-shadow: none; }
 
     footer { max-width: 1200px; width: 100%; margin: 40px auto 0; padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
     .footer-left { color: var(--text-muted); font-size: 0.78rem; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
     .footer-left a { color: var(--mc-blue); text-decoration: none; }
     
-    /* Modré tlačítko pro obchodní podmínky */
     .footer-conditions-btn {
       display: inline-block;
       background: rgba(56, 182, 255, 0.1);
@@ -312,13 +316,13 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
-    // PŘESNÉ POLOŽKY S CENAMI A OBRÁZKY
+    // POLOŽKY (pokud u položky nastavíš soldOut: true, bude vyprodaná a nepůjde koupit)
     const shopItems = [
-      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Cobblestone_JE5_BE3.png?25024" },
-      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Stone_JE5_BE3.png?5780c" },
-      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Stone_Bricks_JE3_BE2.png?4e67a" },
-      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Oak_Log_%28UD%29_JE8_BE3.png?8a080" },
-      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", img: "https://minecraft.wiki/images/Dirt_JE2_BE2.png" }
+      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Cobblestone_JE3_BE2.png" },
+      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Stone_JE2_BE2.png" },
+      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", soldOut: true, img: "https://minecraft.wiki/images/Stone_Bricks_JE2_BE2.png" }, // Příklad vyprodaného itemu
+      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Oak_Log_JE5_BE3.png" },
+      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", soldOut: false, img: "https://minecraft.wiki/images/Dirt_JE2_BE2.png" }
     ];
 
     let cart = [];
@@ -335,15 +339,23 @@
 
         if (matchesCategory && matchesSearch) {
           let badgeClass = item.category === 'stavebni' ? 'badge-stavebni' : 'badge-prirodni';
+          if (item.soldOut) {
+            badgeClass = 'badge-vyprodano';
+          }
+
+          const badgeText = item.soldOut ? 'Vyprodáno' : item.badge;
+          const buttonHtml = item.soldOut 
+            ? `<button class="add-to-cart-btn" disabled><i class="fa-solid fa-ban"></i> Vyprodáno</button>`
+            : `<button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price})"><i class="fa-solid fa-plus"></i> Koupit</button>`;
 
           html += `
             <div class="item-card" data-category="${item.category}">
-              <div class="item-badge ${badgeClass}">${item.badge}</div>
+              <div class="item-badge ${badgeClass}">${badgeText}</div>
               <div class="item-img-wrap"><img src="${item.img}" alt="${item.name}"></div>
               <h3 class="item-title">${item.name}</h3>
               <div class="item-footer">
                 <span class="item-price">${item.price.toLocaleString('cs-CZ')} Kr</span>
-                <button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price})"><i class="fa-solid fa-plus"></i> Koupit</button>
+                ${buttonHtml}
               </div>
             </div>`;
         }
