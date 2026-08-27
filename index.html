@@ -63,23 +63,32 @@
       align-items: center;
     }
 
-    /* Úprava loga vlevo nahoře */
+    /* Úprava loga vlevo nahoře + text vedle něj */
     .logo-link {
       display: flex;
       align-items: center;
+      gap: 12px;
       text-decoration: none;
     }
 
     .logo-img {
-      height: 55px;
+      height: 45px;
       width: auto;
       object-fit: contain;
       filter: drop-shadow(0 0 8px var(--mc-blue-glow));
       transition: transform 0.3s ease;
     }
 
-    .logo-img:hover {
+    .logo-link:hover .logo-img {
       transform: scale(1.05);
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px var(--mc-blue-glow);
     }
 
     .nav-links {
@@ -610,9 +619,10 @@
 
   <!-- HEADER -->
   <header>
-    <!-- Logo vlevo nahoře -->
+    <!-- Logo vlevo nahoře + text Noxify -->
     <a href="#" class="logo-link">
       <img src="logo.png" alt="NOXIFY Logo" class="logo-img">
+      <span class="logo-text">Noxify</span>
     </a>
     <ul class="nav-links">
       <li><a href="#">Domů</a></li>
