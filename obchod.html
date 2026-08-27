@@ -875,12 +875,16 @@
         <button class="close-btn" onclick="toggleSupport()">&times;</button>
       </div>
       <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">
-        Máš problém s objednávkou, nedorazily ti itemy nebo se něco stalo? Napiš nám přímo na podporu a my se ti ozveme!
+        Máš problém s objednávkou, nedorazily ti itemy nebo se něco stalo? Napiš nám a ozveme se ti!
       </div>
       <form class="checkout-form" id="supportForm" onsubmit="handleSupportSubmit(event)">
         <div class="form-group">
           <label for="supportNick">Tvůj Minecraft Nick *</label>
           <input type="text" id="supportNick" placeholder="např. Steve_CZ" required>
+        </div>
+        <div class="form-group">
+          <label for="supportDiscord">Tvůj Discord (např. jmeno#1234) *</label>
+          <input type="text" id="supportDiscord" placeholder="např. esmoon01" required>
         </div>
         <div class="form-group">
           <label for="supportMessage">Popis problému *</label>
@@ -940,7 +944,11 @@
   </div>
 
   <script>
+    // Webhook pro objednávky (košík) - zůstává původní
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
+    
+    // Webhook pro support - nově nastavený
+    const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
     let cart = [];
     let currentCategory = 'all';
@@ -1055,6 +1063,7 @@
     async function handleSupportSubmit(event) {
       event.preventDefault();
       const nick = document.getElementById('supportNick').value;
+      const discord = document.getElementById('supportDiscord').value;
       const message = document.getElementById('supportMessage').value;
       const submitBtn = document.getElementById('supportSubmitBtn');
 
@@ -1066,8 +1075,9 @@
           title: "🎧 Nový požadavek na Support!",
           color: 16753920,
           fields: [
-            { name: "👤 Hráч", value: `\`${nick}\``, inline: true },
-            { name: "💬 Zpráva / Problém", value: message }
+            { name: "👤 Minecraft Nick", value: `\`${nick}\``, inline: true },
+            { name: "💬 Discord", value: `\`${discord}\``, inline: true },
+            { name: "📝 Popis problému", value: message }
           ],
           footer: { text: "Noxify Support System" },
           timestamp: new Date().toISOString()
@@ -1075,7 +1085,7 @@
       };
 
       try {
-        const response = await fetch(DISCORD_WEBHOOK_URL, {
+        const response = await fetch(SUPPORT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payloadJson)
