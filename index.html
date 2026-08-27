@@ -258,7 +258,6 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--mc-blue-glow);
     }
 
-    /* AUTOMATICKÉ STYLY PRO VYPRODANÝ ITEM PŘES JS */
     .item-card.sold-out {
       opacity: 0.6;
       border-color: rgba(255, 85, 85, 0.3);
@@ -268,21 +267,11 @@
       border-color: var(--mc-red);
       box-shadow: none;
     }
-    .item-card.sold-out .item-img-wrap img {
-      filter: grayscale(100%) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
-    }
-    .item-card.sold-out:hover .item-img-wrap img {
-      transform: none;
-    }
     .add-to-cart-btn.sold-out-btn {
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
       border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: not-allowed;
-      box-shadow: none;
-    }
-    .add-to-cart-btn.sold-out-btn:hover {
-      background: rgba(255, 255, 255, 0.05);
       box-shadow: none;
     }
 
@@ -307,17 +296,13 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 15px;
-    }
-
-    .item-img-wrap img {
-      max-height: 100px;
-      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+      font-size: 4rem;
       transition: transform 0.3s;
-      image-rendering: pixelated;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
     }
 
-    .item-card:hover .item-img-wrap img {
-      transform: scale(1.15) rotate(3deg);
+    .item-card:hover .item-img-wrap {
+      transform: scale(1.15) rotate(5deg);
     }
 
     .item-title {
@@ -691,9 +676,7 @@
     
     <!-- Cobblestone -->
     <div class="item-card" data-category="stavebni" data-soldout="false">
-      <div class="item-img-wrap">
-        <img src="https://community.intersystems.com/sites/default/files/inline/images/cobblestone.png" alt="Cobblestone">
-      </div>
+      <div class="item-img-wrap">🏛️</div>
       <h3 class="item-title">Cobblestone</h3>
       <div class="item-footer">
         <span class="item-price" data-price="250">250 Kr</span>
@@ -705,9 +688,7 @@
 
     <!-- Stone -->
     <div class="item-card" data-category="stavebni" data-soldout="false">
-      <div class="item-img-wrap">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/13/Stone_JE2_BE2.png" alt="Stone">
-      </div>
+      <div class="item-img-wrap">🧱</div>
       <h3 class="item-title">Stone</h3>
       <div class="item-footer">
         <span class="item-price" data-price="900">900 Kr</span>
@@ -719,9 +700,7 @@
 
     <!-- Oak Log -->
     <div class="item-card" data-category="prirodni" data-soldout="false">
-      <div class="item-img-wrap">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Oak_Log_JE5_BE3.png" alt="Oak Log">
-      </div>
+      <div class="item-img-wrap">🪵</div>
       <h3 class="item-title">Oak Log</h3>
       <div class="item-footer">
         <span class="item-price" data-price="1400">1 400 Kr</span>
@@ -733,9 +712,7 @@
 
     <!-- Dirt -->
     <div class="item-card" data-category="prirodni" data-soldout="false">
-      <div class="item-img-wrap">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/13/Dirt_JE2_BE2.png" alt="Dirt">
-      </div>
+      <div class="item-img-wrap">🟫</div>
       <h3 class="item-title">Dirt</h3>
       <div class="item-footer">
         <span class="item-price" data-price="250">250 Kr</span>
@@ -747,9 +724,7 @@
 
     <!-- Stone Bricks -->
     <div class="item-card" data-category="stavebni" data-soldout="false">
-      <div class="item-img-wrap">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5a/Stone_Bricks_JE2_BE2.png" alt="Stone Bricks">
-      </div>
+      <div class="item-img-wrap">🪨</div>
       <h3 class="item-title">Stone Bricks</h3>
       <div class="item-footer">
         <span class="item-price" data-price="1000">1 000 Kr</span>
