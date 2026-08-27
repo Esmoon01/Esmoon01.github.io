@@ -45,7 +45,8 @@
         radial-gradient(circle at 90% 80%, rgba(0, 85, 255, 0.08) 0%, transparent 40%);
       background-attachment: fixed;
       min-height: 100vh;
-      padding-bottom: 60px;
+      display: flex;
+      flex-direction: column;
     }
 
     /* HEADER */
@@ -220,6 +221,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 25px;
+      flex-grow: 1;
     }
 
     .item-card {
@@ -313,6 +315,31 @@
       box-shadow: 0 0 15px var(--mc-blue-glow);
     }
 
+    /* FOOTER (ZÁPATÍ) */
+    footer {
+      text-align: center;
+      padding: 40px 20px 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    footer a {
+      color: var(--mc-blue);
+      text-decoration: none;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+
+    footer a:hover {
+      color: #70c7ff;
+      text-shadow: 0 0 8px var(--mc-blue-glow);
+      text-decoration: underline;
+    }
+
     /* MODÁLNÍ OKNO KOŠÍKU */
     .modal-overlay {
       position: fixed;
@@ -390,7 +417,6 @@
       border: 1px solid rgba(255,255,255,0.05);
     }
 
-    /* PAYMENT INSTRUCTIONS BOX */
     .pay-instruction-box {
       background: rgba(56, 182, 255, 0.08);
       border: 1px dashed var(--mc-blue);
@@ -418,7 +444,6 @@
       border: 1px solid rgba(85, 255, 255, 0.2);
     }
 
-    /* FORMULÁŘ V KOŠÍKU */
     .checkout-form {
       display: flex;
       flex-direction: column;
@@ -452,10 +477,6 @@
     .form-group input:focus {
       border-color: var(--mc-blue);
       box-shadow: 0 0 10px var(--mc-blue-glow);
-    }
-
-    .file-input-wrapper {
-      position: relative;
     }
 
     .file-input-wrapper input[type="file"] {
@@ -520,7 +541,6 @@
     <ul class="nav-links">
       <li><a href="#">Domů</a></li>
       <li><a href="#shop">Obchod</a></li>
-      <li><a href="#">Pravidla</a></li>
     </ul>
     <button class="cart-btn" onclick="toggleCart()">
       <i class="fa-solid fa-cart-shopping"></i> Košík
@@ -614,6 +634,12 @@
 
   </main>
 
+  <!-- FOOTER ZÁPATÍ -->
+  <footer>
+    <p>© 2026 Noxify. Minecraft je ochranná známka Mojang Synergies AB.</p>
+    <p><a href="podminky.html">Obchodní podmínky</a></p>
+  </footer>
+
   <!-- MODAL KOŠÍKU -->
   <div class="modal-overlay" id="cartModal">
     <div class="cart-modal">
@@ -622,18 +648,15 @@
         <button class="close-btn" onclick="toggleCart()">&times;</button>
       </div>
       
-      <!-- Seznam Položek -->
       <div class="cart-items" id="cartItems">
         <p style="color: var(--text-muted); text-align: center;">Košík je zatím prázdný.</p>
       </div>
 
-      <!-- Instrukce k platbě -->
       <div class="pay-instruction-box">
         <p><i class="fa-solid fa-info-circle"></i> Zaplaťte celkovou částku na serveru příkazem:</p>
         <span class="command-code">/paybusiness Noxify_sro [ČÁSTKA]</span>
       </div>
 
-      <!-- Formulář pro doručení -->
       <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
         <div class="form-group">
           <label for="playerNick">Minecraft Nickname *</label>
@@ -665,7 +688,6 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT BEHAVIOR -->
   <script>
     let cart = [];
 
@@ -746,7 +768,6 @@
 
       alert(`Díky ${nick}!\n\nObjednávka byla úspěšně odeslána.\nBalíček doručíme na souřadnice: ${coords}.\nAdmini ověří screenshot platby v příkazu /paybusiness Noxify_sro.`);
       
-      // Reset košíku a formuláře
       cart = [];
       document.getElementById('checkoutForm').reset();
       document.getElementById('fileNameText').innerText = 'Nahrát screenshot platby';
