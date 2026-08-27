@@ -297,9 +297,8 @@
       text-transform: uppercase;
     }
 
-    .badge-legendary { background: rgba(255, 170, 0, 0.2); color: var(--mc-gold); border: 1px solid var(--mc-gold); }
-    .badge-epic { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
-    .badge-rare { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
+    .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
+    .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
     .badge-soldout { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap {
@@ -678,9 +677,8 @@
   <div class="controls-container">
     <div class="filter-tags">
       <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
-      <button class="filter-btn" onclick="filterItems('zbrane')">Zbraně & Armor</button>
-      <button class="filter-btn" onclick="filterItems('suroviny')">Suroviny</button>
-      <button class="filter-btn" onclick="filterItems('specialni')">Speciální</button>
+      <button class="filter-btn" onclick="filterItems('stavebni')">Stavební materiály</button>
+      <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
     </div>
     <div class="server-status">
       <div class="status-dot"></div>
@@ -691,64 +689,71 @@
   <!-- SHOP GRID -->
   <main class="shop-grid" id="shop">
     
-    <!-- 
-      JAK NASTAVIT VYPRODÁNO / NASKLADNĚNO:
-      Stačí u card itemu změnit atribut data-soldout:
-      - data-soldout="false" -> Item je naskladněný a normálně se prodává.
-      - data-soldout="true"  -> Item je automaticky vyprodaný, zašedlý a nejde koupit!
-    -->
-
-    <!-- Item 1: Naskladněný (false) -->
-    <div class="item-card" data-category="zbrane" data-soldout="false">
+    <!-- Cobblestone -->
+    <div class="item-card" data-category="stavebni" data-soldout="false">
       <div class="item-img-wrap">
-        <img src="https://minecraft.wiki/images/Netherite_Sword_JE2_BE2.png" alt="Netherite Sword">
+        <img src="https://minecraft.wiki/images/Cobblestone_JE3_BE2.png" alt="Cobblestone">
       </div>
-      <h3 class="item-title">Excalibur Sharpness VI</h3>
+      <h3 class="item-title">Cobblestone</h3>
       <div class="item-footer">
-        <span class="item-price" data-price="1500">1 500 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Excalibur Sharpness VI', 1500, this)">
+        <span class="item-price" data-price="250">250 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Cobblestone', 250, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 2: Vyprodaný (true) -->
-    <div class="item-card" data-category="specialni" data-soldout="true">
+    <!-- Stone -->
+    <div class="item-card" data-category="stavebni" data-soldout="false">
       <div class="item-img-wrap">
-        <img src="https://minecraft.wiki/images/Elytra_JE2_BE2.png" alt="Elytra">
+        <img src="https://minecraft.wiki/images/Stone_JE2_BE2.png" alt="Stone">
       </div>
-      <h3 class="item-title">Dragon Elytra</h3>
+      <h3 class="item-title">Stone</h3>
       <div class="item-footer">
-        <span class="item-price" data-price="3500">3 500 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Dragon Elytra', 3500, this)">
+        <span class="item-price" data-price="900">900 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Stone', 900, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 3: Naskladněný (false) -->
-    <div class="item-card" data-category="suroviny" data-soldout="false">
+    <!-- Oak Log -->
+    <div class="item-card" data-category="prirodni" data-soldout="false">
       <div class="item-img-wrap">
-        <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamonds">
+        <img src="https://minecraft.wiki/images/Oak_Log_JE5_BE3.png" alt="Oak Log">
       </div>
-      <h3 class="item-title">Stack Diamantů (64x)</h3>
+      <h3 class="item-title">Oak Log</h3>
       <div class="item-footer">
-        <span class="item-price" data-price="500">500 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Stack Diamantů (64x)', 500, this)">
+        <span class="item-price" data-price="1400">1 400 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Oak Log', 1400, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 4: Vyprodaný (true) -->
-    <div class="item-card" data-category="specialni" data-soldout="true">
+    <!-- Dirt -->
+    <div class="item-card" data-category="prirodni" data-soldout="false">
       <div class="item-img-wrap">
-        <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_JE2_BE2.gif" alt="God Apple">
+        <img src="https://minecraft.wiki/images/Dirt_JE2_BE2.png" alt="Dirt">
       </div>
-      <h3 class="item-title">God Apple Pack (16x)</h3>
+      <h3 class="item-title">Dirt</h3>
       <div class="item-footer">
-        <span class="item-price" data-price="2000">2 000 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('God Apple Pack (16x)', 2000, this)">
+        <span class="item-price" data-price="250">250 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Dirt', 250, this)">
+          <i class="fa-solid fa-plus"></i> Koupit
+        </button>
+      </div>
+    </div>
+
+    <!-- Stone Bricks -->
+    <div class="item-card" data-category="stavebni" data-soldout="false">
+      <div class="item-img-wrap">
+        <img src="https://minecraft.wiki/images/Stone_Bricks_JE2_BE2.png" alt="Stone Bricks">
+      </div>
+      <h3 class="item-title">Stone Bricks</h3>
+      <div class="item-footer">
+        <span class="item-price" data-price="1000">1 000 Kr</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Stone Bricks', 1000, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
@@ -843,8 +848,8 @@
         const isSoldOut = card.getAttribute('data-soldout') === 'true';
         const priceEl = card.querySelector('.item-price');
         const btnEl = card.querySelector('.add-to-cart-btn');
+        const category = card.getAttribute('data-category');
 
-        // Vytvoříme badge element pro stav (pokud už tam není)
         let badgeEl = card.querySelector('.item-badge');
         if (!badgeEl) {
           badgeEl = document.createElement('span');
@@ -862,9 +867,9 @@
           btnEl.innerHTML = '<i class="fa-solid fa-ban"></i> Nelze koupit';
         } else {
           card.classList.remove('sold-out');
-          badgeEl.className = 'item-badge badge-rare'; // Můžeš změnit dle vkusu na legendary/epic/rare
-          badgeEl.innerText = 'Skladem';
-          // Vrátíme původní cenu z data atributu
+          badgeEl.className = category === 'stavebni' ? 'item-badge badge-stavebni' : 'item-badge badge-prirodni';
+          badgeEl.innerText = category === 'stavebni' ? 'Stavební' : 'Přírodní';
+          
           const originalPrice = priceEl.getAttribute('data-price');
           priceEl.innerText = Number(originalPrice).toLocaleString('cs-CZ') + ' Kr';
           btnEl.className = 'add-to-cart-btn';
