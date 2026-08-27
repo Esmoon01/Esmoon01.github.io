@@ -63,7 +63,6 @@
       align-items: center;
     }
 
-    /* Úprava loga vlevo nahoře + text vedle něj */
     .logo-link {
       display: flex;
       align-items: center;
@@ -259,6 +258,39 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--mc-blue-glow);
     }
 
+    /* STYLY PRO VYPRODANÝ ITEM */
+    .item-card.sold-out {
+      opacity: 0.6;
+      border-color: rgba(255, 85, 85, 0.3);
+    }
+    .item-card.sold-out:hover {
+      transform: none;
+      border-color: var(--mc-red);
+      box-shadow: none;
+    }
+    .item-card.sold-out .item-img-wrap img {
+      filter: grayscale(100%) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+    }
+    .item-card.sold-out:hover .item-img-wrap img {
+      transform: none;
+    }
+    .badge-soldout { 
+      background: rgba(255, 85, 85, 0.2); 
+      color: var(--mc-red); 
+      border: 1px solid var(--mc-red); 
+    }
+    .add-to-cart-btn.sold-out-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .add-to-cart-btn.sold-out-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: none;
+    }
+
     .item-badge {
       position: absolute;
       top: 15px;
@@ -311,6 +343,12 @@
       font-size: 1.7rem;
       color: var(--mc-blue);
       text-shadow: 0 0 8px var(--mc-blue-glow);
+    }
+
+    .item-card.sold-out .item-price {
+      color: var(--text-muted);
+      text-shadow: none;
+      font-size: 1.3rem;
     }
 
     .add-to-cart-btn {
@@ -619,7 +657,6 @@
 
   <!-- HEADER -->
   <header>
-    <!-- Logo vlevo nahoře + text Noxify -->
     <a href="#" class="logo-link">
       <img src="logo.png" alt="NOXIFY Logo" class="logo-img">
       <span class="logo-text">Noxify</span>
@@ -658,7 +695,13 @@
   <!-- SHOP GRID -->
   <main class="shop-grid" id="shop">
     
-    <!-- Item 1 -->
+    <!-- 
+      JAK NASTAVIT VYPRODÁNO / NASKLADNĚNO:
+      - Pokud je item NASKLADNĚNÝ: class bude jen "item-card", badge bude ukazovat stav rarity (např. badge-legendary) a cena bude normální.
+      - Pokud je item VYPRODANÝ: k "item-card" přidej " sold-out" (tedy class="item-card sold-out"), badge přepni na "badge-soldout", text na cenu dej "Vyprodáno" a tlačítko uprav na třídu "add-to-cart-btn sold-out-btn" s atributem "disabled".
+    -->
+
+    <!-- Item 1: Naskladněný item (příklad) -->
     <div class="item-card" data-category="zbrane">
       <span class="item-badge badge-legendary">Legendární</span>
       <div class="item-img-wrap">
@@ -667,28 +710,28 @@
       <h3 class="item-title">Excalibur Sharpness VI</h3>
       <div class="item-footer">
         <span class="item-price">1 500 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Excalibur Sharpness VI', 1500)">
+        <button class="add-to-cart-btn" onclick="addToCart('Excalibur Sharpness VI', 1500, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 2 -->
-    <div class="item-card" data-category="specialni">
-      <span class="item-badge badge-epic">Epic</span>
+    <!-- Item 2: Vyprodaný item (příklad) -->
+    <div class="item-card sold-out" data-category="specialni">
+      <span class="item-badge badge-soldout">Vyprodáno</span>
       <div class="item-img-wrap">
         <img src="https://minecraft.wiki/images/Elytra_JE2_BE2.png" alt="Elytra">
       </div>
       <h3 class="item-title">Dragon Elytra</h3>
       <div class="item-footer">
-        <span class="item-price">3 000 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Dragon Elytra', 3000)">
-          <i class="fa-solid fa-plus"></i> Koupit
+        <span class="item-price">Vyprodáno</span>
+        <button class="add-to-cart-btn sold-out-btn" disabled onclick="addToCart('Dragon Elytra', 0, this)">
+          <i class="fa-solid fa-ban"></i> Nelze koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 3 -->
+    <!-- Item 3: Naskladněný item (příklad) -->
     <div class="item-card" data-category="suroviny">
       <span class="item-badge badge-rare">Rare</span>
       <div class="item-img-wrap">
@@ -697,13 +740,13 @@
       <h3 class="item-title">Stack Diamantů (64x)</h3>
       <div class="item-footer">
         <span class="item-price">500 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('Stack Diamantů (64x)', 500)">
+        <button class="add-to-cart-btn" onclick="addToCart('Stack Diamantů (64x)', 500, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
     </div>
 
-    <!-- Item 4 -->
+    <!-- Item 4: Naskladněný item (příklad) -->
     <div class="item-card" data-category="specialni">
       <span class="item-badge badge-legendary">Legendární</span>
       <div class="item-img-wrap">
@@ -712,7 +755,7 @@
       <h3 class="item-title">God Apple Pack (16x)</h3>
       <div class="item-footer">
         <span class="item-price">2 000 Kr</span>
-        <button class="add-to-cart-btn" onclick="addToCart('God Apple Pack (16x)', 2000)">
+        <button class="add-to-cart-btn" onclick="addToCart('God Apple Pack (16x)', 2000, this)">
           <i class="fa-solid fa-plus"></i> Koupit
         </button>
       </div>
@@ -795,12 +838,18 @@
   </div>
 
   <script>
-    // TVŮJ VLOŽENÝ DISCORD WEBHOOK URL
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
 
     let cart = [];
 
-    function addToCart(name, price) {
+    function addToCart(name, price, buttonElement) {
+      // Bezpečnostní pojistka: pokud je karta vyprodaná, item se do košíku nepřidá
+      const card = buttonElement.closest('.item-card');
+      if (card && card.classList.contains('sold-out')) {
+        alert('Tento item je momentálně vyprodaný a nelze jej přidat do košíku!');
+        return;
+      }
+
       cart.push({ name, price });
       updateCartUI();
       toggleCart();
@@ -876,23 +925,20 @@
         return;
       }
 
-      // Vypnutí tlačítka po dobu odesílání
       submitBtn.disabled = true;
       submitBtn.innerText = "ODESÍLÁM...";
 
-      // Výpočet celkové ceny a seznamu položek
       let total = 0;
       const itemList = cart.map(item => {
         total += item.price;
         return `- ${item.name} (${item.price} Kr)`;
       }).join('\n');
 
-      // Příprava strukturované zprávy pro Discord
       const formData = new FormData();
       const payloadJson = {
         embeds: [{
           title: "🛒 Nová Objednávka z Obchodu!",
-          color: 3716863, // Neonovo modrá barva
+          color: 3716863,
           fields: [
             { name: "👤 Nick ve hře", value: `\`${nick}\``, inline: true },
             { name: "📍 Souřadnice (X, Y, Z)", value: `\`${coords}\``, inline: true },
@@ -908,7 +954,6 @@
       formData.append('file', fileInput.files[0]);
 
       try {
-        // Odeslání požadavku na Discord Webhook
         const response = await fetch(DISCORD_WEBHOOK_URL, {
           method: 'POST',
           body: formData
