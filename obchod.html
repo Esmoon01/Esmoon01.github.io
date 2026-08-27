@@ -105,8 +105,6 @@
     .item-badge { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
     .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
     .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
-    
-    /* Styl pro vyprodaný badge */
     .badge-vyprodano { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
 
     .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
@@ -316,13 +314,13 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
-    // POLOŽKY (pokud u položky nastavíš soldOut: true, bude vyprodaná a nepůjde koupit)
+    // POLOŽKY (opravené funkční odkazy na obrázky)
     const shopItems = [
-      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Cobblestone_JE3_BE2.png" },
-      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Stone_JE2_BE2.png" },
-      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", soldOut: true, img: "https://minecraft.wiki/images/Stone_Bricks_JE2_BE2.png" }, // Příklad vyprodaného itemu
-      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Oak_Log_JE5_BE3.png" },
-      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", soldOut: false, img: "https://minecraft.wiki/images/Dirt_JE2_BE2.png" }
+      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/77/Cobblestone.png" },
+      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b3/Stone.png" },
+      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", soldOut: true, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/a2/Stone_Bricks.png" },
+      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/1b/Oak_Log.png" },
+      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", soldOut: false, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/77/Dirt.png" }
     ];
 
     let cart = [];
@@ -515,7 +513,6 @@
       }
     }
 
-    // Spustit generování stránek při načtení
     renderShop();
   </script>
 </body>
