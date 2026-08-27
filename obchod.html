@@ -85,10 +85,622 @@
     .hero h1 span { color: var(--mc-blue); text-shadow: 0 0 20px var(--mc-blue-glow); }
     .hero p { color: var(--text-muted); font-size: 1.1rem; }
 
-    .controls-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .controls-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; width: 100%; }
     .filters-search-wrapper { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; flex-grow: 1; }
     .filter-tags { display: flex; gap: 10px; flex-wrap: wrap; }
     .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
     .filter-btn:hover, .filter-btn.active { background: rgba(56, 182, 255, 0.2); border-color: var(--mc-blue); color: var(--mc-blue); }
 
-    .search-box { position: relative
+    .search-box { position: relative; flex-grow: 1; max-width: 300px; }
+    .search-box input { width: 100%; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 9px 14px 9px 38px; border-radius: 8px; outline: none; }
+    .search-box input:focus { border-color: var(--mc-blue); box-shadow: 0 0 10px var(--mc-blue-glow); }
+    .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+    .server-status { display: flex; align-items: center; gap: 10px; background: var(--card-bg); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 8px; font-family: var(--font-pixel); font-size: 1.2rem; }
+    .status-dot { width: 10px; height: 10px; background: var(--mc-blue); border-radius: 50%; box-shadow: 0 0 8px var(--mc-blue); }
+
+    .shop-grid { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; flex-grow: 1; width: 100%; }
+    .item-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; position: relative; transition: all 0.3s; }
+    .item-card:hover { transform: translateY(-8px); border-color: var(--mc-blue); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--mc-blue-glow); }
+
+    .item-badge { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .badge-stavebni { background: rgba(56, 182, 255, 0.2); color: var(--mc-blue); border: 1px solid var(--mc-blue); }
+    .badge-prirodni { background: rgba(85, 255, 255, 0.2); color: var(--mc-cyan); border: 1px solid var(--mc-cyan); }
+    .badge-vyprodano { background: rgba(255, 85, 85, 0.2); color: var(--mc-red); border: 1px solid var(--mc-red); }
+
+    .item-img-wrap { height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+    .item-img-wrap img { max-height: 90px; width: auto; image-rendering: pixelated; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5)); transition: transform 0.3s; }
+    .item-card:hover .item-img-wrap img { transform: scale(1.1); }
+
+    .item-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
+    .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+    .item-price { font-family: var(--font-pixel); font-size: 1.7rem; color: var(--mc-blue); }
+    
+    .add-to-cart-btn { background: var(--mc-blue); color: #050914; border: none; padding: 10px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .add-to-cart-btn:disabled { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); cursor: not-allowed; box-shadow: none; }
+
+    .reviews-section { max-width: 1200px; margin: 60px auto 20px; padding: 0 20px; width: 100%; }
+    .reviews-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+    .section-title { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .section-title i { color: var(--mc-yellow); }
+    .add-review-main-btn { background: rgba(255, 170, 0, 0.1); border: 1px solid var(--mc-yellow); color: var(--mc-yellow); padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .add-review-main-btn:hover { background: var(--mc-yellow); color: #050914; box-shadow: 0 0 15px rgba(255, 170, 0, 0.4); }
+
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+    .review-card-header { display: flex; justify-content: space-between; align-items: center; }
+    .review-author { font-weight: 700; font-size: 1.1rem; color: var(--mc-cyan); }
+    .review-stars { color: var(--mc-yellow); font-size: 0.9rem; }
+    .review-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.4; word-break: break-word; }
+    .no-reviews { color: var(--text-muted); font-style: italic; grid-column: 1 / -1; text-align: center; padding: 20px; }
+
+    footer { max-width: 1200px; width: 100%; margin: 40px auto 0; padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
+    .footer-left { color: var(--text-muted); font-size: 0.78rem; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-left a { color: var(--mc-blue); text-decoration: none; }
+    
+    .footer-conditions-btn {
+      display: inline-block;
+      background: rgba(56, 182, 255, 0.1);
+      border: 1px solid var(--mc-blue);
+      color: var(--mc-blue);
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px var(--mc-blue-glow);
+    }
+    .footer-conditions-btn:hover {
+      background: var(--mc-blue);
+      color: #050914;
+      box-shadow: 0 0 20px var(--mc-blue-glow);
+    }
+
+    .footer-contacts { text-align: right; }
+    .footer-contacts h4 { color: var(--mc-cyan); font-size: 0.85rem; margin-bottom: 6px; }
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .contact-item { color: var(--text-main); font-size: 0.8rem; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+
+    .support-modal-overlay, .review-modal-overlay, .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+      z-index: 1000; display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .support-modal-overlay.active, .review-modal-overlay.active, .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .support-modal, .review-modal, .cart-modal {
+      background: #080e1c; border: 1px solid var(--mc-blue);
+      width: 90%; max-width: 480px; border-radius: 16px; padding: 25px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 25px var(--mc-blue-glow);
+    }
+    .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; }
+    .close-btn { background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+
+    .checkout-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 10px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; }
+    .form-group input, .form-group textarea {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
+      color: var(--text-main); padding: 10px 14px; border-radius: 8px; outline: none; font-family: var(--font-ui);
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--mc-blue); box-shadow: 0 0 10px var(--mc-blue-glow); }
+
+    .star-rating { display: flex; gap: 8px; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
+    .star-rating i:hover, .star-rating i.active { color: var(--mc-yellow); text-shadow: 0 0 10px rgba(255, 170, 0, 0.5); }
+
+    .file-input-wrapper input[type="file"] { display: none; }
+    .file-custom-btn {
+      background: rgba(255, 255, 255, 0.05); border: 1px dashed var(--border-color);
+      color: var(--text-muted); padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .cart-items { max-height: 180px; overflow-y: auto; margin-bottom: 20px; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 8px; }
+    .pay-instruction-box { background: rgba(56, 182, 255, 0.08); border: 1px dashed var(--mc-blue); border-radius: 10px; padding: 14px; margin-bottom: 20px; text-align: center; }
+    .command-code { font-family: var(--font-pixel); font-size: 1.3rem; color: var(--mc-cyan); background: rgba(0, 0, 0, 0.4); padding: 4px 10px; border-radius: 6px; display: inline-block; }
+    .cart-summary { border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+    .checkout-btn { width: 100%; background: var(--mc-blue); color: #050914; border: none; padding: 14px; border-radius: 8px; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px var(--mc-blue-glow); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="logo.png" alt="NOXIFY Logo" class="logo-img">
+      <span class="logo-text">Noxify</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Domů</a></li>
+      <li><a href="obchod.html" class="active">Obchod</a></li>
+    </ul>
+    <div class="header-actions">
+      <button class="support-btn" onclick="toggleSupport()"><i class="fa-solid fa-headset"></i> Support</button>
+      <button class="review-btn" onclick="toggleReview()"><i class="fa-solid fa-star"></i> Recenze</button>
+      <button class="cart-btn" onclick="toggleCart()"><i class="fa-solid fa-cart-shopping"></i> Košík <span class="cart-count" id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">PLATBA HERNÍ MĚNOU (Kr)</div>
+    <h1>Na Noxify najdeš <span>nejlepší ceny</span></h1>
+    <p>Vyber si itemy, zaplať na serveru přes <b>/paybusiness</b> a pošli nám screenshot potvrzení.</p>
+  </section>
+
+  <div class="controls-container">
+    <div class="filters-search-wrapper">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
+        <button class="filter-btn" onclick="filterItems('stavebni')">Stavební bloky</button>
+        <button class="filter-btn" onclick="filterItems('prirodni')">Přírodní bloky</button>
+      </div>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Hledat item..." oninput="renderShop()">
+      </div>
+    </div>
+    <div class="server-status"><div class="status-dot"></div>play.rpmc.cz</div>
+  </div>
+
+  <main class="shop-grid" id="shopGrid">
+    <!-- Generováno automaticky přes JS -->
+  </main>
+
+  <section class="reviews-section">
+    <div class="reviews-header-flex">
+      <h2 class="section-title"><i class="fa-solid fa-star"></i> Hodnocení zákazníků</h2>
+      <button class="add-review-main-btn" onclick="toggleReview()"><i class="fa-solid fa-plus"></i> Přidat recenzi</button>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid">
+      <!-- Sem se vkládají recenze -->
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">
+      <p>© 2026 EaZ market. Minecraft je ochranná známka Mojang Synergies AB.</p>
+      <a href="podminky.html" class="footer-conditions-btn">Obchodní podmínky</a>
+    </div>
+    <div class="footer-contacts">
+      <h4>Kontaktujte mě</h4>
+      <ul class="contact-list">
+        <li class="contact-item"><span>Discord: <strong>Esmoon01</strong></span><i class="fa-brands fa-discord"></i></li>
+        <li class="contact-item"><span>Instagram: <strong>Esmoon01</strong></span><i class="fa-brands fa-instagram"></i></li>
+        <li class="contact-item"><span>Email: <strong>esmoon987@gmail.com</strong></span><i class="fa-solid fa-envelope"></i></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- SUPPORT MODAL -->
+  <div class="support-modal-overlay" id="supportModal">
+    <div class="support-modal">
+      <div class="cart-header">
+        <h2><i class="fa-solid fa-headset" style="color: var(--mc-blue);"></i> Zákaznická Podpora</h2>
+        <button class="close-btn" onclick="toggleSupport()">&times;</button>
+      </div>
+      <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        Máš problém s objednávkou, nedorazily ti itemy nebo se něco stalo? Napiš nám přímo na podporu a my se ti ozveme!
+      </div>
+      <form class="checkout-form" id="supportForm" onsubmit="handleSupportSubmit(event)">
+        <div class="form-group">
+          <label for="supportNick">Tvůj Minecraft Nick *</label>
+          <input type="text" id="supportNick" placeholder="např. Steve_CZ" required>
+        </div>
+        <div class="form-group">
+          <label for="supportDiscord">Discord Jméno *</label>
+          <input type="text" id="supportDiscord" placeholder="např. esmoon01" required>
+        </div>
+        <div class="form-group">
+          <label for="supportMessage">Popis problému *</label>
+          <textarea id="supportMessage" rows="4" placeholder="Napiš co se stalo..." required></textarea>
+        </div>
+        <button type="submit" class="checkout-btn" id="supportSubmitBtn" style="margin-top: 10px;">ODESLAT NA PODPORU</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- RECENZE MODAL -->
+  <div class="review-modal-overlay" id="reviewModal">
+    <div class="review-modal">
+      <div class="cart-header">
+        <h2><i class="fa-solid fa-star" style="color: var(--mc-yellow);"></i> Přidat recenzi</h2>
+        <button class="close-btn" onclick="toggleReview()">&times;</button>
+      </div>
+      <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        Jsi spokojený s naším obchodem? Ohodnoť nás a napiš svou zkušenost!
+      </div>
+      <form class="checkout-form" id="reviewForm" onsubmit="handleReviewSubmit(event)">
+        <div class="form-group">
+          <label for="reviewNick">Tvůj Minecraft Nick *</label>
+          <input type="text" id="reviewNick" placeholder="např. Steve_CZ" required>
+        </div>
+        <div class="form-group">
+          <label>Hodnocení *</label>
+          <div class="star-rating" id="starRating">
+            <i class="fa-solid fa-star active" data-value="1" onclick="setRating(1)"></i>
+            <i class="fa-solid fa-star active" data-value="2" onclick="setRating(2)"></i>
+            <i class="fa-solid fa-star active" data-value="3" onclick="setRating(3)"></i>
+            <i class="fa-solid fa-star active" data-value="4" onclick="setRating(4)"></i>
+            <i class="fa-solid fa-star active" data-value="5" onclick="setRating(5)"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reviewMessage">Tvůj komentář / Recenze *</label>
+          <textarea id="reviewMessage" rows="4" placeholder="Rychlé dodání, skvělé ceny..." required></textarea>
+        </div>
+        <button type="submit" class="checkout-btn" id="reviewSubmitBtn" style="margin-top: 10px;">ODESLAT A ZVEŘEJNIT</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="cart-modal">
+      <div class="cart-header">
+        <h2>Váš Košík & Platba</h2>
+        <button class="close-btn" onclick="toggleCart()">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p style="color: var(--text-muted); text-align: center;">Košík je zatím prázdný.</p>
+      </div>
+      <div class="pay-instruction-box">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Zaplaťte celkovou částku na serveru příkazem:</p>
+        <span class="command-code">/paybusiness Noxify_sro [ČÁSTKA]</span>
+      </div>
+      <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
+        <div class="form-group">
+          <label for="playerNick">Minecraft Nickname *</label>
+          <input type="text" id="playerNick" placeholder="např. Steve_CZ" required>
+        </div>
+        <div class="form-group">
+          <label for="playerCoords">Souřadnice pro doručení (X, Y, Z) *</label>
+          <input type="text" id="playerCoords" placeholder="např. X: 120, Y: 64, Z: -450" required>
+        </div>
+        <div class="form-group">
+          <label>Potvrzení o platbě (Screenshot) *</label>
+          <div class="file-input-wrapper">
+            <input type="file" id="payScreenshot" accept="image/*" required onchange="updateFileName(this)">
+            <label for="payScreenshot" class="file-custom-btn" id="fileBtnLabel">
+              <i class="fa-solid fa-upload"></i> <span id="fileNameText">Nahrát screenshot platby</span>
+            </label>
+          </div>
+        </div>
+        <div class="cart-summary">
+          <span>Celkem k úhradě:</span>
+          <span id="cartTotal" style="color: var(--mc-blue);">0 Kr</span>
+        </div>
+        <button type="submit" class="checkout-btn" id="submitBtn">ODESLAT OBJEDNÁVKU</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
+    const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
+    const REVIEW_WEBHOOK_URL = "https://discord.com/api/webhooks/1542621555136405574/F_jfhIvDXMIRQ3_CGnggigt9_T4eKvY1azgrzc-fa4om7aD-K8lkvGGxBXc4MqBp0TkB";
+
+    const shopItems = [
+      { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Cobblestone_JE5_BE3.png?25024" },
+      { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Stone_JE5_BE3.png?5780c" },
+      { name: "Stone Bricks (64 ks)", price: 1000, category: "stavebni", badge: "Stavební", soldOut: true, img: "https://minecraft.wiki/images/Stone_Bricks_JE3_BE2.png?4e67a" },
+      { name: "Oak Log (64 ks)", price: 1400, category: "stavebni", badge: "Stavební", soldOut: false, img: "https://minecraft.wiki/images/Oak_Log_%28UD%29_JE8_BE3.png?8a080" },
+      { name: "Dirt (64 ks)", price: 250, category: "prirodni", badge: "Přírodní", soldOut: false, img: "https://minecraft.wiki/images/Dirt_JE2_BE2.png?438ac" }
+    ];
+
+    let cart = [];
+    let currentCategory = 'all';
+    let currentRating = 5;
+
+    function renderShop() {
+      const grid = document.getElementById('shopGrid');
+      const searchInput = document.getElementById('searchInput');
+      const searchQuery = searchInput ? searchInput.value.toLowerCase() : '';
+      
+      let html = '';
+      shopItems.forEach(item => {
+        const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          let badgeClass = item.category === 'stavebni' ? 'badge-stavebni' : 'badge-prirodni';
+          if (item.soldOut) {
+            badgeClass = 'badge-vyprodano';
+          }
+
+          const badgeText = item.soldOut ? 'Vyprodáno' : item.badge;
+          const buttonHtml = item.soldOut 
+            ? `<button class="add-to-cart-btn" disabled><i class="fa-solid fa-ban"></i> Vyprodáno</button>`
+            : `<button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price})"><i class="fa-solid fa-plus"></i> Koupit</button>`;
+
+          html += `
+            <div class="item-card" data-category="${item.category}">
+              <div class="item-badge ${badgeClass}">${badgeText}</div>
+              <div class="item-img-wrap"><img src="${item.img}" alt="${item.name}"></div>
+              <h3 class="item-title">${item.name}</h3>
+              <div class="item-footer">
+                <span class="item-price">${item.price.toLocaleString('cs-CZ')} Kr</span>
+                ${buttonHtml}
+              </div>
+            </div>`;
+        }
+      });
+
+      if (grid) grid.innerHTML = html;
+    }
+
+    function filterItems(category) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (event && event.target) event.target.classList.add('active');
+      renderShop();
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCartUI();
+      toggleCart();
+    }
+
+    function updateCartUI() {
+      const cartCount = document.getElementById('cartCount');
+      if (cartCount) cartCount.innerText = cart.length;
+      
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      if (!cartItems || !cartTotal) return;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Košík je zatím prázdný.</p>';
+        cartTotal.innerText = '0 Kr';
+        return;
+      }
+
+      let itemsHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        itemsHTML += `
+          <div class="cart-item">
+            <div><strong>${item.name}</strong><div style="font-size: 0.8rem; color: var(--text-muted);">${item.price.toLocaleString('cs-CZ')} Kr</div></div>
+            <i class="fa-solid fa-trash" style="color: var(--mc-red); cursor: pointer;" onclick="removeFromCart(${index})"></i>
+          </div>`;
+      });
+      cartItems.innerHTML = itemsHTML;
+      cartTotal.innerText = `${total.toLocaleString('cs-CZ')} Kr`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function toggleCart() { const m = document.getElementById('cartModal'); if(m) m.classList.toggle('active'); }
+    function toggleSupport() { const m = document.getElementById('supportModal'); if(m) m.classList.toggle('active'); }
+    function toggleReview() { const m = document.getElementById('reviewModal'); if(m) m.classList.toggle('active'); }
+
+    function setRating(rating) {
+      currentRating = rating;
+      const stars = document.querySelectorAll('#starRating i');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        const fn = document.getElementById('fileNameText');
+        if (fn) fn.innerText = input.files[0].name;
+      }
+    }
+
+    function loadReviews() {
+      const grid = document.getElementById('reviewsGrid');
+      if (!grid) return;
+      
+      let reviews = [];
+      try {
+        reviews = JSON.parse(localStorage.getItem('noxify_reviews')) || [];
+      } catch (e) {
+        reviews = [];
+      }
+
+      if (reviews.length === 0) {
+        grid.innerHTML = `<div class="no-reviews">Zatím zde nejsou žádné recenze. Buď první, kdo nějakou přidá!</div>`;
+        return;
+      }
+
+      let html = '';
+      [...reviews].reverse().forEach(rev => {
+        const starsHtml = '<i class="fa-solid fa-star"></i>'.repeat(rev.rating || 5);
+        html += `
+          <div class="review-card">
+            <div class="review-card-header">
+              <span class="review-author">${rev.nick || 'Anonym'}</span>
+              <span class="review-stars">${starsHtml}</span>
+            </div>
+            <p class="review-text">${rev.message || ''}</p>
+          </div>`;
+      });
+      grid.innerHTML = html;
+    }
+
+    async function handleReviewSubmit(event) {
+      event.preventDefault();
+      const nick = document.getElementById('reviewNick').value;
+      const message = document.getElementById('reviewMessage').value;
+      const submitBtn = document.getElementById('reviewSubmitBtn');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "ODESÍLÁM...";
+      }
+
+      let reviews = [];
+      try {
+        reviews = JSON.parse(localStorage.getItem('noxify_reviews')) || [];
+      } catch (e) {
+        reviews = [];
+      }
+
+      reviews.push({ nick, rating: currentRating, message, date: new Date().toISOString() });
+      localStorage.setItem('noxify_reviews', JSON.stringify(reviews));
+
+      const starsText = "⭐".repeat(currentRating);
+      const payloadJson = {
+        embeds: [{
+          title: "⭐ Nová recenze obchodu!",
+          color: 16761036,
+          fields: [
+            { name: "👤 Hráč", value: `\`${nick}\``, inline: true },
+            { name: "🌟 Hodnocení", value: starsText, inline: true },
+            { name: "💬 Komentář", value: message }
+          ],
+          footer: { text: "Noxify Reviews System" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        await fetch(REVIEW_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadJson)
+        });
+      } catch (e) {
+        console.error("Chyba při odesílání na webhook");
+      }
+
+      alert(`Díky ${nick}!\nTvá recenze byla úspěšně přidána na web.`);
+      document.getElementById('reviewForm').reset();
+      setRating(5);
+      toggleReview();
+      loadReviews();
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ODESLAT A ZVEŘEJNIT";
+      }
+    }
+
+    async function handleSupportSubmit(event) {
+      event.preventDefault();
+      const nick = document.getElementById('supportNick').value;
+      const discord = document.getElementById('supportDiscord').value;
+      const message = document.getElementById('supportMessage').value;
+      const submitBtn = document.getElementById('supportSubmitBtn');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "ODESÍLÁM...";
+      }
+
+      const payloadJson = {
+        embeds: [{
+          title: "🎧 Nový požadavek na Support!",
+          color: 16753920,
+          fields: [
+            { name: "👤 Minecraft Nick", value: `\`${nick}\``, inline: true },
+            { name: "💬 Discord", value: `\`${discord}\``, inline: true },
+            { name: "📝 Popis problému", value: message }
+          ],
+          footer: { text: "Noxify Support System" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        const response = await fetch(SUPPORT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadJson)
+        });
+
+        if (response.ok) {
+          alert(`Díky ${nick}!\n\nTvůj požadavek na podporu byl odeslán.`);
+          document.getElementById('supportForm').reset();
+          toggleSupport();
+        } else {
+          alert('Chyba při odesílání požadavku.');
+        }
+      } catch (error) {
+        alert('Došlo k chybě při odesílání.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = "ODESLAT NA PODPORU";
+        }
+      }
+    }
+
+    async function handleCheckout(event) {
+      event.preventDefault();
+      if (cart.length === 0) return;
+
+      const nick = document.getElementById('playerNick').value;
+      const coords = document.getElementById('playerCoords').value;
+      const fileInput = document.getElementById('payScreenshot');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "ODESÍLÁM...";
+      }
+
+      let total = 0;
+      const itemList = cart.map(item => { total += item.price; return `- ${item.name} (${item.price.toLocaleString('cs-CZ')} Kr)`; }).join('\n');
+
+      const formData = new FormData();
+      const payloadJson = {
+        embeds: [{
+          title: "🛒 Nová Objednávka z Obchodu!",
+          color: 3716863,
+          fields: [
+            { name: "👤 Nick ve hře", value: `\`${nick}\``, inline: true },
+            { name: "📍 Souřadnice", value: `\`${coords}\``, inline: true },
+            { name: "💰 Celkem", value: `**${total.toLocaleString('cs-CZ')} Kr**`, inline: true },
+            { name: "📦 Položky", value: itemList }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      formData.append('payload_json', JSON.stringify(payloadJson));
+      if (fileInput && fileInput.files[0]) {
+        formData.append('file', fileInput.files[0]);
+      }
+
+      try {
+        const response = await fetch(DISCORD_WEBHOOK_URL, { method: 'POST', body: formData });
+        if (response.ok) {
+          alert(`Díky ${nick}!\n\nObjednávka byla úspěšně odeslána.`);
+          cart = [];
+          document.getElementById('checkoutForm').reset();
+          const fn = document.getElementById('fileNameText');
+          if (fn) fn.innerText = 'Nahrát screenshot platby';
+          updateCartUI();
+          toggleCart();
+        } else {
+          alert('Chyba při odesílání objednávky.');
+        }
+      } catch (error) {
+        alert('Došlo k chybě.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
+        }
+      }
+    }
+
+    // Inicializace po načtení DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      renderShop();
+      loadReviews();
+    });
+  </script>
+</body>
+</html>
