@@ -116,8 +116,29 @@
     .add-to-cart-btn { background: var(--mc-blue); color: #050914; border: none; padding: 10px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 
     footer { max-width: 1200px; width: 100%; margin: 40px auto 0; padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
-    .footer-left { color: var(--text-muted); font-size: 0.78rem; }
+    .footer-left { color: var(--text-muted); font-size: 0.78rem; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
     .footer-left a { color: var(--mc-blue); text-decoration: none; }
+    
+    /* Modré tlačítko pro obchodní podmínky */
+    .footer-conditions-btn {
+      display: inline-block;
+      background: rgba(56, 182, 255, 0.1);
+      border: 1px solid var(--mc-blue);
+      color: var(--mc-blue);
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px var(--mc-blue-glow);
+    }
+    .footer-conditions-btn:hover {
+      background: var(--mc-blue);
+      color: #050914;
+      box-shadow: 0 0 20px var(--mc-blue-glow);
+    }
+
     .footer-contacts { text-align: right; }
     .footer-contacts h4 { color: var(--mc-cyan); font-size: 0.85rem; margin-bottom: 6px; }
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
@@ -204,7 +225,10 @@
   </main>
 
   <footer>
-    <div class="footer-left"><p>© 2026 Noxify. Mojang AB není autorem.</p></div>
+    <div class="footer-left">
+      <p>© 2026 EaZ market. Minecraft je ochranná známka Mojang Synergies AB.</p>
+      <a href="podminky.html" class="footer-conditions-btn">Obchodní podmínky</a>
+    </div>
     <div class="footer-contacts">
       <h4>Kontaktujte mě</h4>
       <ul class="contact-list">
@@ -288,7 +312,7 @@
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542337270546174014/vwHQpMRrs6zQF1Wzd9-dJ3odceWam61Ki6ueMQGkJVBqzpdRUnYhJCcrFOrm1skR60xU";
     const SUPPORT_WEBHOOK_URL = "https://discord.com/api/webhooks/1542473556078764095/ScBDT3CKWCwIxneAhGScjlvRqEMEpGVr5s-VxNMTFw3PytGL1BhWaYwuCckV3RQnTfUP";
 
-    // POLOŽKY S REÁLNÝMI MINECRAFT OBRÁZKY
+    // PŘESNÉ POLOŽKY S CENAMI A OBRÁZKY
     const shopItems = [
       { name: "Cobblestone (64 ks)", price: 250, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Cobblestone_JE3_BE2.png" },
       { name: "Stone (64 ks)", price: 900, category: "stavebni", badge: "Stavební", img: "https://minecraft.wiki/images/Stone_JE2_BE2.png" },
