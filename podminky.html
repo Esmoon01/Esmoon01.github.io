@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOXIFY | Obchodní podmínky</title>
+  
+  <!-- Google Fonts: VT323 + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Ikony -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #050914;
+      --card-bg: rgba(13, 22, 45, 0.75);
+      --mc-blue: #38b6ff;
+      --mc-blue-glow: rgba(56, 182, 255, 0.4);
+      --mc-cyan: #55ffff;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --border-color: rgba(56, 182, 255, 0.2);
+      --font-pixel: 'VT323', monospace;
+      --font-ui: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(56, 182, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(0, 85, 255, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 9, 20, 0.85);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-pixel);
+      font-size: 2.2rem;
+      color: var(--mc-blue);
+      text-shadow: 0 0 12px var(--mc-blue-glow);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--mc-blue);
+    }
+
+    /* OBSAH PODMÍNEK */
+    .terms-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mc-blue);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: gap 0.2s;
+    }
+
+    .back-btn:hover {
+      gap: 12px;
+    }
+
+    .terms-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .terms-card h1 {
+      font-size: 2.2rem;
+      color: var(--mc-blue);
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px var(--mc-blue-glow);
+    }
+
+    .terms-card .updated-date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .terms-section {
+      margin-bottom: 30px;
+    }
+
+    .terms-section h2 {
+      font-size: 1.3rem;
+      color: var(--mc-cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .terms-section p, .terms-section ul {
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .terms-section ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .terms-section li {
+      margin-bottom: 6px;
+    }
+
+    .highlight-box {
+      background: rgba(56, 182, 255, 0.08);
+      border-left: 3px solid var(--mc-blue);
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* FOOTER (STEJNÝ JAKO NA HLAVNÍ STRÁNCE) */
+    footer {
+      text-align: center;
+      padding: 40px 20px 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    footer a {
+      color: var(--mc-blue);
+      text-decoration: none;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+
+    footer a:hover {
+      color: #70c7ff;
+      text-shadow: 0 0 8px var(--mc-blue-glow);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-cube"></i> NOXIFY
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Domů</a></li>
+      <li><a href="index.html#shop">Obchod</a></li>
+    </ul>
+  </header>
+
+  <!-- TERMS CONTAINER -->
+  <div class="terms-container">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Zpět do obchodu</a>
+
+    <div class="terms-card">
+      <h1>Obchodní podmínky</h1>
+      <div class="updated-date">Poslední aktualizace: 2026</div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-info-circle"></i> 1. Úvodní ustanovení</h2>
+        <p>Tyto obchodní podmínky upravují pravidla nákupu virtuálních herních předmětů a služeb na webovém rozhraní <strong>Noxify</strong>, určených pro použití na serveru PLAY.NOXIFY.CZ.</p>
+        <div class="highlight-box">
+          Nákupem na tomto webu vyjadřujete plný souhlas s těmito podmínkami a zavazujete se dodržovat pravidla Minecraft serveru Noxify.
+        </div>
+      </div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-coins"></i> 2. Měna a způsob platby</h2>
+        <p>Veškeré transakce v tomto obchodě probíhají výhradně ve <strong>virtuální herní měně (Kr / Koruny)</strong> prostřednictvím herního systému serveru Noxify.</p>
+        <ul>
+          <li>Platba probíhá příkazem <code>/paybusiness Noxify_sro [Částka]</code> přímo ve hře.</li>
+          <li>K dokončení objednávky je kupující povinen nahrát platný screenshot potvrzující platbu ze hry.</li>
+          <li>V obchodu neproudí žádné reálné peníze (CZK, EUR ani jiné fiat měny).</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-box-open"></i> 3. Doručení zboží</h2>
+        <p>Virtuální předměty jsou doručovány do truhly nebo přímo hráči na souřadnice zadané při objednávce.</p>
+        <ul>
+          <li>Standardní doba doručení je <strong>24 až 48 hodin</strong> od ověření platby týmem serveru.</li>
+          <li>Kupující je povinen zadat přesný nick a správné souřadnice (X, Y, Z). V případě chybného zadání souřadnic nenese provozovatel odpovědnost za nedoručení.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-shield-cat"></i> 4. Vrácení a reklamace</h2>
+        <p>Vzhledem k povaze virtuálních digitálních předmětů platí následující pravidla reklamace:</p>
+        <ul>
+          <li>Virtuální měnu (Kr) použitou k nákupu <strong>nelze vrátit</strong>, pokud byl balíček úspěšně doručen na zadané souřadnice.</li>
+          <li>Pokud zboží nebylo doručeno do 48 hodin, má hráč právo kontaktovat podporu přes serverový Discord nebo přímo ve hře.</li>
+          <li>V případě ztráty předmětu z důvodu úmrtí hráče ve hře (PvP/PvE) nebo krádeže jiným hráčem z nezabezpečené truhly se náhrada neposkytuje.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-gavel"></i> 5. Zablokování účtu (Ban)</h2>
+        <p>Pokud bude hráči udělen dočasný nebo trvalý ban za porušení pravidel serveru (hackerství, podvody, nevhodné chování):</p>
+        <ul>
+          <li>Hráč nemá nárok na kompenzaci ani náhradu zakoupených itemů.</li>
+          <li>Zakoupené itemy zůstávají svázané s herním světem a nebudou převedeny na jiný účet.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2><i class="fa-solid fa-headset"></i> 6. Kontakt a podpora</h2>
+        <p>Pro řešení dotazů, nefunkčních objednávek nebo hlášení chyb využijte náš Discord server nebo kontaktujte vedení serveru přímo ve hře přes ticket systém.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER ZÁPATÍ -->
+  <footer>
+    <p>© 2026 Noxify. Minecraft je ochranná známka Mojang Synergies AB.</p>
+    <p><a href="podminky.html">Obchodní podmínky</a></p>
+  </footer>
+
+</body>
+</html>
