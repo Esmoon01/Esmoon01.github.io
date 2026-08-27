@@ -1,1 +1,637 @@
-<h1 I am Esmoon01 </h1>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRAFTMARKET | Nejlepší Minecraft Item Shop</title>
+  
+  <!-- Google Fonts: VT323 (pixel) + Inter (čitelnost) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Ikony -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #090a0f;
+      --card-bg: rgba(22, 27, 34, 0.7);
+      --mc-green: #55ff55;
+      --mc-green-glow: rgba(85, 255, 85, 0.4);
+      --mc-gold: #ffaa00;
+      --mc-aqua: #55ffff;
+      --mc-red: #ff5555;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --font-pixel: 'VT323', monospace;
+      --font-ui: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(85, 255, 85, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(85, 255, 255, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(9, 10, 15, 0.8);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-pixel);
+      font-size: 2rem;
+      color: var(--mc-green);
+      text-shadow: 0 0 10px var(--mc-green-glow);
+      text-decoration: none;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--mc-green);
+    }
+
+    .cart-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .cart-btn:hover {
+      border-color: var(--mc-green);
+      box-shadow: 0 0 15px var(--mc-green-glow);
+    }
+
+    .cart-count {
+      background: var(--mc-green);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 70px 20px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(85, 255, 85, 0.1);
+      border: 1px solid var(--mc-green);
+      color: var(--mc-green);
+      font-family: var(--font-pixel);
+      font-size: 1.2rem;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--mc-green);
+      text-shadow: 0 0 20px var(--mc-green-glow);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* FILTRY A VYHLEDÁVÁNÍ */
+    .controls-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(85, 255, 85, 0.15);
+      border-color: var(--mc-green);
+      color: var(--mc-green);
+    }
+
+    .server-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: var(--font-pixel);
+      font-size: 1.1rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--mc-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--mc-green);
+    }
+
+    /* GRID PRODUKTŮ */
+    .shop-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .item-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--mc-green);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--mc-green-glow);
+    }
+
+    .item-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-legendary { background: rgba(255, 170, 0, 0.2); color: var(--mc-gold); border: 1px solid var(--mc-gold); }
+    .badge-epic { background: rgba(85, 255, 255, 0.2); color: var(--mc-aqua); border: 1px solid var(--mc-aqua); }
+    .badge-rare { background: rgba(85, 255, 85, 0.2); color: var(--mc-green); border: 1px solid var(--mc-green); }
+
+    .item-img-wrap {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .item-img-wrap img {
+      max-height: 100px;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+      transition: transform 0.3s;
+      image-rendering: pixelated;
+    }
+
+    .item-card:hover .item-img-wrap img {
+      transform: scale(1.15) rotate(3deg);
+    }
+
+    .item-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .item-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .item-price {
+      font-family: var(--font-pixel);
+      font-size: 1.6rem;
+      color: var(--mc-gold);
+    }
+
+    .add-to-cart-btn {
+      background: var(--mc-green);
+      color: #051405;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #77ff77;
+      box-shadow: 0 0 15px var(--mc-green-glow);
+    }
+
+    /* MODÁLNÍ OKNO KOŠÍKU */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cart-modal {
+      background: #0f1319;
+      border: 1px solid var(--border-color);
+      width: 90%;
+      max-width: 500px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .cart-modal {
+      transform: translateY(0);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .close-btn:hover { color: var(--text-main); }
+
+    .cart-items {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.03);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .cart-summary {
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: var(--mc-green);
+      color: #000;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--mc-green-glow);
+    }
+
+    .checkout-btn:hover { background: #77ff77; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo">
+      <i class="fa-solid fa-cube"></i> CRAFTMARKET
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Domů</a></li>
+      <li><a href="#shop">Obchod</a></li>
+      <li><a href="#">VIP Výhody</a></li>
+    </ul>
+    <button class="cart-btn" onclick="toggleCart()">
+      <i class="fa-solid fa-cart-shopping"></i> Košík
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-badge">AUTOMATICKÉ DORUČENÍ NA SERVER DO 5 SEKUND</div>
+    <h1>Vybav svůj charakter tím <span>nejlepším gearem!</span></h1>
+    <p>Získej meče s OP enchanty, legendární kresby, křídla a suroviny. Žádné čekání, platba okamžitě aktivuje předměty na tvojem nicku.</p>
+  </section>
+
+  <!-- FILTRY & STATUS -->
+  <div class="controls-container">
+    <div class="filter-tags">
+      <button class="filter-btn active" onclick="filterItems('all')">Všechno</button>
+      <button class="filter-btn" onclick="filterItems('zbrane')">Zbraně & Armor</button>
+      <button class="filter-btn" onclick="filterItems('suroviny')">Suroviny</button>
+      <button class="filter-btn" onclick="filterItems('specialni')">Speciální</button>
+    </div>
+    <div class="server-status">
+      <div class="status-dot"></div>
+      PLAY.CRAFTMARKET.CZ (1 420 Hráčů)
+    </div>
+  </div>
+
+  <!-- SHOP GRID -->
+  <main class="shop-grid" id="shop">
+    
+    <!-- Item 1 -->
+    <div class="item-card" data-category="zbrane">
+      <span class="item-badge badge-legendary">Legendární</span>
+      <div class="item-img-wrap">
+        <img src="https://assets.badlion.net/site/assets/item-icons/netherite_sword.png" alt="Netherite Sword" onError="this.src='https://minecraft.wiki/images/Netherite_Sword_JE2_BE2.png'">
+      </div>
+      <h3 class="item-title">Excalibur Sharpness VI</h3>
+      <p class="item-desc">Netherite meč s maximálním enchantem Sharpness 6, Unbreaking 3 a Fire Aspect 2.</p>
+      <div class="item-footer">
+        <span class="item-price">149 Kč</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Excalibur Sharpness VI', 149)">
+          <i class="fa-solid fa-plus"></i> Koupit
+        </button>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="item-card" data-category="specialni">
+      <span class="item-badge badge-epic">Epic</span>
+      <div class="item-img-wrap">
+        <img src="https://minecraft.wiki/images/Elytra_JE2_BE2.png" alt="Elytra">
+      </div>
+      <h3 class="item-title">Dragon Elytra</h3>
+      <p class="item-desc">Umožní ti létat po celé mapě. Dodáváno s Mending a Unbreaking III.</p>
+      <div class="item-footer">
+        <span class="item-price">299 Kč</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Dragon Elytra', 299)">
+          <i class="fa-solid fa-plus"></i> Koupit
+        </button>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="item-card" data-category="suroviny">
+      <span class="item-badge badge-rare">Rare</span>
+      <div class="item-img-wrap">
+        <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamonds">
+      </div>
+      <h3 class="item-title">Stack Diamantů (64x)</h3>
+      <p class="item-desc">Plný stack čistých diamantů přímo do tvého inventáře na serveru.</p>
+      <div class="item-footer">
+        <span class="item-price">49 Kč</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Stack Diamantů (64x)', 49)">
+          <i class="fa-solid fa-plus"></i> Koupit
+        </button>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="item-card" data-category="specialni">
+      <span class="item-badge badge-legendary">Legendární</span>
+      <div class="item-img-wrap">
+        <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_JE2_BE2.gif" alt="God Apple">
+      </div>
+      <h3 class="item-title">God Apple Pack (16x)</h3>
+      <p class="item-desc">Legendární Notch Apples pro maximální regenní boost během PvP soubojů.</p>
+      <div class="item-footer">
+        <span class="item-price">199 Kč</span>
+        <button class="add-to-cart-btn" onclick="addToCart('God Apple Pack (16x)', 199)">
+          <i class="fa-solid fa-plus"></i> Koupit
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL KOŠÍKU -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="cart-modal">
+      <div class="cart-header">
+        <h2>Váš Košík</h2>
+        <button class="close-btn" onclick="toggleCart()">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p style="color: var(--text-muted); text-align: center;">Košík je zatím prázdný.</p>
+      </div>
+      <div class="cart-summary">
+        <span>Celkem:</span>
+        <span id="cartTotal" style="color: var(--mc-gold);">0 Kč</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">JÍT K PLATBĚ</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT BEHAVIOR -->
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCartUI();
+      toggleCart();
+    }
+
+    function updateCartUI() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+
+      cartCount.innerText = cart.length;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Košík je zatím prázdný.</p>';
+        cartTotal.innerText = '0 Kč';
+        return;
+      }
+
+      let itemsHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        itemsHTML += `
+          <div class="cart-item">
+            <div>
+              <strong>${item.name}</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">${item.price} Kč</div>
+            </div>
+            <i class="fa-solid fa-trash" style="color: var(--mc-red); cursor: pointer;" onclick="removeFromCart(${index})"></i>
+          </div>
+        `;
+      });
+
+      cartItems.innerHTML = itemsHTML;
+      cartTotal.innerText = `${total} Kč`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.classList.toggle('active');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Tvůj košík je prázdný!');
+        return;
+      }
+      const nick = prompt("Zadej svůj Minecraft Nickname pro doručení items:");
+      if (nick) {
+        alert(`Díky ${nick}! Byl jsi přesměrován na platební bránu. Po zaplacení dostaneš předměty ve hře.`);
+        cart = [];
+        updateCartUI();
+        toggleCart();
+      }
+    }
+
+    function filterItems(category) {
+      const cards = document.querySelectorAll('.item-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
